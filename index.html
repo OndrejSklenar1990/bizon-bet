@@ -203,8 +203,6 @@
       </div>
       <div class="player-stats">
         <div class="stat"><div class="val" id="playerSTR">1512</div><div class="lbl">STR</div></div>
-        <div class="stat"><div class="val" id="playerPct" style="color:#e05050">0%</div><div class="lbl">ÚSPĚŠNOST</div></div>
-        <div class="stat"><div class="val" id="playerRecord">0/33</div><div class="lbl">V/P</div></div>
       </div>
     </div>
 
@@ -467,14 +465,9 @@ function selectPlayer(p) {
 
 function renderPlayerCard() {
   const p = selectedPlayer;
-  const winPct = p.l + p.w > 0 ? ((p.w / (p.w + p.l)) * 100).toFixed(0) : '0';
-  const pctColor = p.pct >= 50 ? '#4ec67a' : p.pct >= 30 ? '#e8a830' : '#e05050';
   $('playerName').textContent = p.name;
   $('playerClub').textContent = p.club;
   $('playerSTR').textContent = p.str;
-  $('playerPct').textContent = winPct + '%';
-  $('playerPct').style.color = pctColor;
-  $('playerRecord').textContent = p.w + '/' + p.l;
 }
 
 // ── OPPONENTS ──
