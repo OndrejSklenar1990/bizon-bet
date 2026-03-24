@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BIZON BET</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1f35; --navy2: #162c47;
+    --gold: #d4a843; --gold2: #f0c96a;
+    --red: #c0392b; --green: #1e8c4e;
+    --bg: #0a1929; --card: #111f30;
+    --border: rgba(212,168,67,0.2);
+    --text: #e8dfc8; --muted: rgba(232,223,200,0.45);
+    --ticket-bg: #faf6ec; --ticket-text: #1a1208;
+    --ticket-muted: #7a6a4a; --ticket-border: #d4c89a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); font-family: 'DM Sans', sans-serif; color: var(--text); min-height: 100vh;
+    background-image: radial-gradient(ellipse at 20% 0%, rgba(212,168,67,0.07) 0%, transparent 60%), radial-gradient(ellipse at 80% 100%, rgba(13,31,53,0.8) 0%, transparent 60%); }
+
+  /* HEADER */
+  header { background: var(--navy); border-bottom: 2px solid var(--gold); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 64px; position: sticky; top: 0; z-index: 100; }
+  .logo { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 3px; color: var(--gold); display: flex; align-items: center; gap: 10px; }
+  .logo-sub { font-size: 0.55rem; letter-spacing: 4px; color: var(--muted); font-family: 'DM Mono', monospace; margin-top: -4px; }
+  .header-right { display: flex; align-items: center; gap: 12px; }
+  .header-badge { background: rgba(212,168,67,0.12); border: 1px solid var(--border); border-radius: 4px; padding: 4px 12px; font-size: 0.7rem; font-family: 'DM Mono', monospace; color: var(--gold); letter-spacing: 1px; }
+  #authArea { display: flex; align-items: center; gap: 8px; }
+  .user-pill { display: flex; align-items: center; gap: 8px; background: rgba(212,168,67,0.1); border: 1px solid var(--border); border-radius: 20px; padding: 4px 12px 4px 6px; font-size: 0.75rem; color: var(--text); }
+  .user-pill img { width: 24px; height: 24px; border-radius: 50%; object-fit: cover; }
+  .user-pill .u-avatar { width: 24px; height: 24px; border-radius: 50%; background: var(--gold); display: inline-flex; align-items: center; justify-content: center; font-size: 0.7rem; color: var(--navy); font-weight: 600; }
+  .u-name { max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .btn-auth { background: transparent; border: 1px solid var(--border); border-radius: 4px; padding: 5px 12px; font-size: 0.7rem; color: var(--muted); cursor: pointer; font-family: 'DM Mono', monospace; letter-spacing: 1px; transition: border-color 0.15s, color 0.15s; }
+  .btn-auth:hover { border-color: var(--gold); color: var(--gold); }
+  .btn-auth.primary { color: var(--gold); border-color: var(--gold); }
+
+  /* LOGIN SCREEN */
+  #loginScreen { display: none; position: fixed; inset: 0; z-index: 300; background: rgba(10,25,41,0.97); align-items: center; justify-content: center; }
+  #loginScreen.active { display: flex; }
+  .login-box { background: var(--card); border: 1px solid var(--border); border-top: 3px solid var(--gold); border-radius: 12px; padding: 2.5rem 2rem; max-width: 360px; width: 90%; text-align: center; }
+  .login-logo { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: var(--gold); letter-spacing: 4px; }
+  .login-sub-txt { font-size: 0.6rem; color: var(--muted); letter-spacing: 3px; font-family: 'DM Mono', monospace; margin-bottom: 2rem; }
+  .login-title { font-size: 0.85rem; color: var(--text); margin-bottom: 1.5rem; }
+  .btn-oauth { width: 100%; padding: 11px 16px; border-radius: 6px; border: 1px solid var(--border); background: var(--navy2); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 0.88rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 10px; transition: border-color 0.15s, background 0.15s; }
+  .btn-oauth:hover { border-color: var(--gold); background: rgba(212,168,67,0.08); }
+  .btn-oauth svg { width: 20px; height: 20px; flex-shrink: 0; }
+  .login-note { font-size: 0.62rem; color: var(--muted); margin-top: 1.5rem; line-height: 1.7; font-family: 'DM Mono', monospace; }
+
+  /* LAYOUT */
+  .layout { display: grid; grid-template-columns: 1fr 360px; gap: 0; max-width: 1100px; margin: 0 auto; padding: 2rem 1rem; align-items: start; }
+  @media (max-width: 780px) { .layout { grid-template-columns: 1fr; } }
+  .left-panel { padding-right: 2rem; }
+
+  /* SETUP BANNER */
+  .setup-banner { background: rgba(212,168,67,0.08); border: 1px solid rgba(212,168,67,0.35); border-radius: 8px; padding: 1.2rem 1.5rem; margin-bottom: 1.5rem; }
+  .setup-banner h3 { font-family: 'Bebas Neue', sans-serif; color: var(--gold); letter-spacing: 2px; font-size: 1.1rem; margin-bottom: 0.5rem; }
+  .setup-banner p { font-size: 0.72rem; color: var(--text); line-height: 1.8; margin-bottom: 0.4rem; font-family: 'DM Mono', monospace; }
+  .setup-banner a { color: var(--gold2); }
+  .setup-banner strong { color: var(--gold2); }
+  .config-inputs { display: grid; gap: 6px; margin-top: 0.75rem; }
+  .config-input { width: 100%; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 4px; padding: 7px 10px; font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--text); outline: none; transition: border-color 0.15s; }
+  .config-input:focus { border-color: var(--gold); }
+  .config-input::placeholder { color: var(--muted); }
+  .btn-configure { margin-top: 8px; background: var(--gold); color: var(--navy); border: none; border-radius: 4px; padding: 8px 20px; font-family: 'Bebas Neue', sans-serif; font-size: 0.95rem; letter-spacing: 2px; cursor: pointer; transition: background 0.15s; }
+  .btn-configure:hover { background: var(--gold2); }
+
+  /* PLAYER CARD */
+  .player-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1.2rem 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+  .player-info h2 { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 2px; color: var(--gold); }
+  .player-info .club { font-size: 0.72rem; color: var(--muted); font-family: 'DM Mono', monospace; margin-top: 2px; }
+  .player-stats { display: flex; gap: 1.5rem; }
+  .stat .val { font-family: 'DM Mono', monospace; font-size: 1.2rem; font-weight: 500; color: var(--gold2); }
+  .stat .lbl { font-size: 0.62rem; color: var(--muted); letter-spacing: 1px; margin-top: 2px; }
+  .section-title { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 3px; color: var(--gold); margin-bottom: 0.75rem; opacity: 0.8; }
+
+  /* OPPONENTS */
+  .opponents-list { display: flex; flex-direction: column; gap: 6px; }
+  .opp-row { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 0.85rem 1.1rem; display: grid; grid-template-columns: 1fr auto auto auto; align-items: center; gap: 1rem; cursor: pointer; transition: border-color 0.15s, background 0.15s, transform 0.1s; user-select: none; }
+  .opp-row:hover { border-color: var(--gold); background: rgba(212,168,67,0.06); transform: translateX(2px); }
+  .opp-row.selected { border-color: var(--gold); background: rgba(212,168,67,0.12); box-shadow: inset 3px 0 0 var(--gold); }
+  .opp-name { font-size: 0.92rem; font-weight: 500; }
+  .opp-meta { font-size: 0.68rem; color: var(--muted); font-family: 'DM Mono', monospace; margin-top: 2px; }
+  .str-gap { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted); text-align: center; }
+  .str-gap .gap-val { display: block; font-size: 0.62rem; }
+  .odds-display { text-align: right; }
+  .odds-val { font-family: 'Bebas Neue', sans-serif; font-size: 1.55rem; letter-spacing: 1px; line-height: 1; }
+  .odds-prob { font-size: 0.62rem; color: var(--muted); font-family: 'DM Mono', monospace; }
+  .color-green { color: #4ec67a; } .color-amber { color: #e8a830; } .color-red { color: #e05050; }
+  .add-btn { width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid var(--border); background: transparent; color: var(--gold); font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.15s, border-color 0.15s; flex-shrink: 0; }
+  .opp-row:hover .add-btn, .opp-row.selected .add-btn { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+  .hint { font-size: 0.68rem; color: var(--muted); font-family: 'DM Mono', monospace; margin-top: 0.75rem; text-align: center; }
+
+  /* HISTORY */
+  .history-section { margin-top: 2rem; }
+  .history-item { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 8px; font-family: 'DM Mono', monospace; }
+  .hi-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+  .hi-ref { font-size: 0.65rem; color: var(--gold); letter-spacing: 1px; }
+  .hi-date { font-size: 0.6rem; color: var(--muted); }
+  .hi-matches { font-size: 0.68rem; color: var(--muted); margin-bottom: 4px; }
+  .hi-footer { display: flex; justify-content: space-between; font-size: 0.7rem; }
+  .hi-combo { color: var(--text); } .hi-payout { color: var(--gold2); }
+
+  /* TICKET */
+  .ticket-panel { position: sticky; top: 80px; }
+  .ticket { background: var(--ticket-bg); border-radius: 8px; overflow: hidden; box-shadow: 0 8px 40px rgba(0,0,0,0.5); font-family: 'DM Mono', monospace; }
+  .ticket-header { background: var(--navy); padding: 1rem 1.2rem; text-align: center; border-bottom: 3px solid var(--gold); }
+  .t-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 3px; color: var(--gold); }
+  .t-sub { font-size: 0.6rem; color: rgba(255,255,255,0.4); letter-spacing: 2px; margin-top: 2px; }
+  .ticket-body { padding: 1rem 1.2rem; }
+  .ticket-empty { text-align: center; color: var(--ticket-muted); font-size: 0.75rem; padding: 2rem 0; letter-spacing: 1px; }
+  .ticket-empty .icon { font-size: 2rem; display: block; margin-bottom: 0.5rem; opacity: 0.4; }
+  .ticket-item { border-bottom: 1px dashed var(--ticket-border); padding: 0.6rem 0; display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; }
+  .ticket-item:last-child { border-bottom: none; }
+  .ti-name { font-size: 0.75rem; color: var(--ticket-text); flex: 1; }
+  .ti-vs { font-size: 0.6rem; color: var(--ticket-muted); }
+  .ti-odds { font-size: 0.9rem; font-weight: 500; color: var(--navy); }
+  .ti-remove { background: none; border: none; cursor: pointer; color: var(--ticket-muted); font-size: 0.9rem; padding: 0 2px; transition: color 0.1s; }
+  .ti-remove:hover { color: var(--red); }
+  .ticket-divider { border: none; border-top: 2px dashed var(--ticket-border); margin: 0.75rem 0; }
+  .ticket-combo { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem; }
+  .tc-label { font-size: 0.65rem; color: var(--ticket-muted); letter-spacing: 1px; }
+  .tc-val { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--navy); letter-spacing: 1px; }
+  .ticket-form { margin-top: 0.5rem; }
+  .form-row { margin-bottom: 0.75rem; }
+  .form-row label { display: block; font-size: 0.6rem; color: var(--ticket-muted); letter-spacing: 1px; margin-bottom: 4px; }
+  .form-row input[type=text] { width: 100%; background: #fff; border: 1.5px solid var(--ticket-border); border-radius: 4px; padding: 7px 10px; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--ticket-text); outline: none; transition: border-color 0.15s; }
+  .form-row input[type=text]:focus { border-color: var(--navy); }
+  .form-row input[type=range] { width: 100%; accent-color: var(--navy); cursor: pointer; }
+  .range-row { display: flex; align-items: center; gap: 10px; }
+  .range-row input { flex: 1; }
+  .range-val { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; color: var(--navy); min-width: 60px; text-align: right; }
+  .payout-box { background: var(--navy); border-radius: 6px; padding: 0.9rem 1rem; margin: 0.75rem 0; }
+  .payout-row { display: flex; justify-content: space-between; margin-bottom: 4px; }
+  .payout-label { font-size: 0.65rem; color: rgba(255,255,255,0.5); letter-spacing: 1px; }
+  .payout-val { font-size: 0.75rem; color: rgba(255,255,255,0.7); }
+  .payout-row.total { margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.1); }
+  .payout-row.total .payout-label { color: var(--gold); }
+  .payout-row.total .payout-val { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; color: var(--gold); letter-spacing: 1px; line-height: 1; }
+  .submit-btn { width: 100%; background: var(--gold); color: var(--navy); border: none; border-radius: 6px; padding: 12px; font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 2px; cursor: pointer; transition: background 0.15s, transform 0.1s; }
+  .submit-btn:hover { background: var(--gold2); transform: translateY(-1px); }
+  .submit-btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+  .login-cta { text-align: center; padding: 1rem 0; }
+  .login-cta p { font-size: 0.72rem; color: var(--ticket-muted); margin-bottom: 0.75rem; line-height: 1.6; }
+  .btn-login-small { background: var(--navy); color: var(--gold); border: none; border-radius: 6px; padding: 9px 20px; font-family: 'Bebas Neue', sans-serif; font-size: 0.95rem; letter-spacing: 2px; cursor: pointer; transition: background 0.15s; }
+  .btn-login-small:hover { background: var(--navy2); }
+
+  /* CONFIRMATION */
+  .confirm-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 200; align-items: center; justify-content: center; }
+  .confirm-overlay.active { display: flex; }
+  .confirm-box { background: var(--ticket-bg); border-radius: 12px; padding: 2rem; max-width: 360px; width: 90%; text-align: center; font-family: 'DM Mono', monospace; box-shadow: 0 20px 60px rgba(0,0,0,0.5); border-top: 4px solid var(--gold); }
+  .c-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--navy); letter-spacing: 3px; margin-bottom: 0.2rem; }
+  .c-ref { font-size: 0.65rem; color: var(--ticket-muted); letter-spacing: 2px; margin-bottom: 1.5rem; }
+  .c-name { font-size: 1rem; font-weight: 600; color: var(--navy); margin-bottom: 0.5rem; }
+  .confirm-matches { text-align: left; margin: 1rem 0; border-top: 1px dashed var(--ticket-border); border-bottom: 1px dashed var(--ticket-border); padding: 0.75rem 0; }
+  .confirm-match { font-size: 0.72rem; color: var(--ticket-text); padding: 3px 0; display: flex; justify-content: space-between; }
+  .c-payout { background: var(--navy); border-radius: 6px; padding: 0.75rem 1rem; margin: 1rem 0; display: flex; justify-content: space-between; align-items: center; }
+  .c-payout .lbl { font-size: 0.6rem; color: rgba(255,255,255,0.5); letter-spacing: 1px; }
+  .c-payout .amt { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--gold); letter-spacing: 1px; }
+  .c-note { font-size: 0.62rem; color: var(--ticket-muted); margin-bottom: 1rem; line-height: 1.6; }
+  .c-close { background: var(--navy); color: var(--gold); border: none; border-radius: 6px; padding: 10px 24px; font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 2px; cursor: pointer; }
+
+  /* TOAST */
+  .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(80px); background: var(--navy); color: var(--gold); border: 1px solid var(--border); border-radius: 6px; padding: 10px 20px; font-family: 'DM Mono', monospace; font-size: 0.8rem; letter-spacing: 1px; z-index: 500; transition: transform 0.3s; pointer-events: none; white-space: nowrap; }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <span>🦬</span>
+    <div><div>BIZON BET</div><div class="logo-sub">SÁZKOVÝ DŮM</div></div>
+  </div>
+  <div class="header-right">
+    <div class="header-badge">1. TŘÍDA A · 2025/2026</div>
+    <div id="authArea">
+      <button class="btn-auth primary" onclick="showLogin()">PŘIHLÁSIT SE</button>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+  <div class="left-panel">
+
+    <div id="setupBanner" style="display:none"></div>
+
+    <div class="player-card">
+      <div class="player-info">
+        <h2>Šimůnek Ondřej</h2>
+        <div class="club">TJ Slavoj Praha B</div>
+      </div>
+      <div class="player-stats">
+        <div class="stat"><div class="val">1512</div><div class="lbl">STR</div></div>
+        <div class="stat"><div class="val" style="color:#e05050">0%</div><div class="lbl">ÚSPĚŠNOST</div></div>
+        <div class="stat"><div class="val">0/33</div><div class="lbl">V/P</div></div>
+      </div>
+    </div>
+
+    <div class="section-title">SOUPEŘI Z TJ SOKOL NUSLE PRAHA A — KLIKNI PRO PŘIDÁNÍ DO TIKETU</div>
+    <div class="opponents-list" id="oppList"></div>
+    <div class="hint">Více zápasů = kurzy se násobí · Kombinovaný tiket</div>
+
+    <div class="history-section" id="historySection" style="display:none">
+      <div class="section-title" style="margin-top:0">MÉ TIKETY</div>
+      <div id="historyList"></div>
+    </div>
+  </div>
+
+  <!-- TICKET -->
+  <div class="ticket-panel">
+    <div class="ticket">
+      <div class="ticket-header">
+        <div class="t-logo">🦬 BIZON BET</div>
+        <div class="t-sub">TIKET · NEOFICIÁLNÍ · POUZE PRO SRANDU</div>
+      </div>
+      <div class="ticket-body">
+        <div id="ticketEmpty" class="ticket-empty">
+          <span class="icon">🏓</span>
+          Přidej zápasy z levého panelu
+        </div>
+        <div id="ticketItems"></div>
+        <div id="ticketForm" style="display:none">
+          <hr class="ticket-divider">
+          <div class="ticket-combo">
+            <span class="tc-label">KOMBINOVANÝ KURZ</span>
+            <span class="tc-val" id="comboOdds">1.00</span>
+          </div>
+          <div class="ticket-form">
+            <div class="form-row">
+              <label>JMÉNO SÁZKAŘE</label>
+              <input type="text" id="betName" placeholder="Zadej jméno..." maxlength="40">
+            </div>
+            <div class="form-row">
+              <label>VKLAD (20–200 CZK)</label>
+              <div class="range-row">
+                <input type="range" id="betAmount" min="20" max="200" step="10" value="50">
+                <span class="range-val" id="amountDisplay">50 Kč</span>
+              </div>
+            </div>
+            <div class="payout-box">
+              <div class="payout-row"><span class="payout-label">VKLAD</span><span class="payout-val" id="p-stake">50 Kč</span></div>
+              <div class="payout-row"><span class="payout-label">POPLATEK (10%)</span><span class="payout-val" id="p-fee">5 Kč</span></div>
+              <div class="payout-row"><span class="payout-label">ČISTÝ VKLAD</span><span class="payout-val" id="p-net">45 Kč</span></div>
+              <div class="payout-row total"><span class="payout-label">MOŽNÁ VÝHRA</span><span class="payout-val" id="p-win">–</span></div>
+            </div>
+            <div id="submitArea"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LOGIN SCREEN -->
+<div id="loginScreen">
+  <div class="login-box">
+    <div class="login-logo">🦬 BIZON BET</div>
+    <div class="login-sub-txt">SÁZKOVÝ DŮM</div>
+    <div class="login-title">Přihlas se pro zadání tiketu</div>
+    <button class="btn-oauth" id="btnGoogle" onclick="signInGoogle()">
+      <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+        <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+        <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+        <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.35-8.16 2.35-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+      </svg>
+      Pokračovat s Google
+    </button>
+
+    <div class="login-note">Přihlášením souhlasíš, že je to jen pro srandu.<br>Žádné skutečné peníze zde nefigurují. 🦬</div>
+    <br>
+    <button class="btn-auth" onclick="hideLogin()" style="margin:0 auto;display:block">Zavřít</button>
+  </div>
+</div>
+
+<!-- CONFIRMATION -->
+<div class="confirm-overlay" id="confirmOverlay">
+  <div class="confirm-box">
+    <div class="c-logo">🦬 BIZON BET</div>
+    <div class="c-ref" id="c-ref">REF: BB-000000</div>
+    <div class="c-name" id="c-name"></div>
+    <div class="confirm-matches" id="c-matches"></div>
+    <div class="c-payout">
+      <div><div class="lbl">MOŽNÁ VÝHRA</div></div>
+      <div class="amt" id="c-amt"></div>
+    </div>
+    <div class="c-note">Tiket uložen do tvé historie. Věříme v Ondřeje! 🏓<br><small>Pouze pro zábavu — bez právní hodnoty.</small></div>
+    <button class="c-close" onclick="closeConfirm()">ZAVŘÍT</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script type="module">
+import { initializeApp, getApps } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import { getAuth, GoogleAuthProvider, OAuthProvider, signInWithPopup, signOut, onAuthStateChanged }
+  from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+import { getFirestore, collection, addDoc, query, where, orderBy, getDocs, serverTimestamp }
+  from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+
+// ── DATA ──
+const ONDREJ_STR = 1512;
+const opponents = [
+  { name: "Pour Lukáš",      str: 1495, w: 4,  l: 20, pct: 16.67 },
+  { name: "Tichý Květoslav", str: 1576, w: 5,  l: 31, pct: 13.89 },
+  { name: "Hron Jiří",       str: 1596, w: 13, l: 34, pct: 27.66 },
+  { name: "Kraml Karel",     str: 1604, w: 8,  l: 19, pct: 29.63 },
+  { name: "Zapletal Jan",    str: 1609, w: 30, l: 27, pct: 52.63 },
+  { name: "Plch Jiří",       str: 1627, w: 2,  l: 1,  pct: 66.67 },
+  { name: "Němec Michal",    str: 1628, w: 1,  l: 5,  pct: 16.67 },
+  { name: "Prokš Vladimír",  str: 1651, w: 17, l: 33, pct: 34.00 },
+  { name: "Jelínek Šimon",   str: 1669, w: 20, l: 25, pct: 44.44 },
+];
+
+let ticket = [];
+let currentUser = null;
+let auth = null;
+let db = null;
+let firebaseReady = false;
+
+// ── UTILS ──
+const calcOdds = str => {
+  const p = Math.max(0.04, (1 / (1 + Math.pow(10, (str - ONDREJ_STR) / 400))) * 0.85);
+  return parseFloat((1 / p).toFixed(2));
+};
+const colorClass = o => o < 8 ? 'color-green' : o < 14 ? 'color-amber' : 'color-red';
+const esc = s => { const d = document.createElement('div'); d.appendChild(document.createTextNode(String(s))); return d.innerHTML; };
+const $ = id => document.getElementById(id);
+
+function showToast(msg) {
+  const t = $('toast'); t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3200);
+}
+
+// ── FIREBASE ──
+const FIREBASE_CONFIG = {
+  apiKey:            "AIzaSyCor9PTYUgj_OScDeksdr9HTz6HDFphgkQ",
+  authDomain:        "bizon-bet.firebaseapp.com",
+  projectId:         "bizon-bet",
+  storageBucket:     "bizon-bet.firebasestorage.app",
+  messagingSenderId: "921891579815",
+  appId:             "1:921891579815:web:7fe993317e967079107882",
+  measurementId:     "G-YSEH5XFX5K"
+};
+
+function tryInitFirebase() {
+  try {
+    const app = getApps().length ? getApps()[0] : initializeApp(FIREBASE_CONFIG);
+    auth = getAuth(app);
+    db = getFirestore(app);
+    firebaseReady = true;
+    $('setupBanner').style.display = 'none';
+    onAuthStateChanged(auth, handleAuth);
+    return true;
+  } catch(e) { showToast('Firebase chyba: ' + e.message); return false; }
+}
+
+window.saveConfig = () => {
+  if (tryInitFirebase()) showToast('✓ Firebase připojen! Můžeš se přihlásit.');
+};
+
+// ── AUTH ──
+window.showLogin = () => {
+  if (!firebaseReady) { showToast('Nejdřív nakonfiguruj Firebase!'); return; }
+  $('loginScreen').classList.add('active');
+};
+window.hideLogin = () => $('loginScreen').classList.remove('active');
+
+window.signInGoogle = async () => {
+  try { await signInWithPopup(auth, new GoogleAuthProvider()); hideLogin(); }
+  catch(e) { showToast('Google: ' + e.message); }
+};
+window.signInMicrosoft = async () => {
+  try {
+    const p = new OAuthProvider('microsoft.com');
+    p.setCustomParameters({ prompt: 'select_account' });
+    await signInWithPopup(auth, p); hideLogin();
+  } catch(e) { showToast('Microsoft: ' + e.message); }
+};
+window.doSignOut = async () => { await signOut(auth); showToast('Odhlášen'); };
+
+function handleAuth(user) {
+  currentUser = user;
+  const area = $('authArea');
+  if (user) {
+    const name = esc(user.displayName || user.email || 'Uživatel');
+    const avatar = user.photoURL
+      ? `<img src="${esc(user.photoURL)}" alt="">`
+      : `<span class="u-avatar">${esc((user.displayName || '?')[0])}</span>`;
+    area.innerHTML = `<div class="user-pill">${avatar}<span class="u-name">${name}</span></div><button class="btn-auth" onclick="doSignOut()">ODHLÁSIT</button>`;
+    const ni = $('betName'); if (ni && !ni.value) ni.value = user.displayName || '';
+    loadHistory();
+  } else {
+    area.innerHTML = `<button class="btn-auth primary" onclick="showLogin()">PŘIHLÁSIT SE</button>`;
+    $('historySection').style.display = 'none';
+  }
+  renderSubmitArea();
+}
+
+// ── HISTORY ──
+async function loadHistory() {
+  if (!currentUser || !db) return;
+  try {
+    const q = query(collection(db, 'tickets'), where('uid', '==', currentUser.uid), orderBy('createdAt', 'desc'));
+    const snap = await getDocs(q);
+    const section = $('historySection'), list = $('historyList');
+    if (snap.empty) { section.style.display = 'none'; return; }
+    section.style.display = 'block';
+    list.innerHTML = '';
+    snap.forEach(doc => {
+      const d = doc.data();
+      const date = d.createdAt?.toDate ? d.createdAt.toDate().toLocaleDateString('cs-CZ') : '–';
+      const names = (d.matches || []).map(m => esc(m.name)).join(', ');
+      const el = document.createElement('div');
+      el.className = 'history-item';
+      el.innerHTML = `
+        <div class="hi-header"><span class="hi-ref">${esc(d.ref||'')}</span><span class="hi-date">${date}</span></div>
+        <div class="hi-matches">vs ${names}</div>
+        <div class="hi-footer"><span class="hi-combo">Kurz: ${parseFloat(d.combo||1).toFixed(2)}</span><span class="hi-payout">Výhra: ${d.payout||'–'} Kč</span></div>`;
+      list.appendChild(el);
+    });
+  } catch(e) { console.error(e); }
+}
+
+// ── OPPONENTS ──
+function renderOpponents() {
+  const list = $('oppList'); list.innerHTML = '';
+  opponents.forEach(opp => {
+    const odds = calcOdds(opp.str);
+    const diff = opp.str - ONDREJ_STR;
+    const sel = ticket.some(t => t.name === opp.name);
+    const row = document.createElement('div');
+    row.className = 'opp-row' + (sel ? ' selected' : '');
+
+    const info = document.createElement('div');
+    info.innerHTML = `<div class="opp-name">${esc(opp.name)}</div><div class="opp-meta">STR ${opp.str} · ${opp.w}V/${opp.l}P · ${opp.pct.toFixed(0)}% úsp.</div>`;
+
+    const gap = document.createElement('div');
+    gap.className = 'str-gap';
+    gap.innerHTML = `${diff >= 0 ? '+' : ''}${diff}<span class="gap-val">STR gap</span>`;
+
+    const oddsDiv = document.createElement('div');
+    oddsDiv.className = 'odds-display';
+    oddsDiv.innerHTML = `<div class="odds-val ${colorClass(odds)}">${odds.toFixed(2)}</div><div class="odds-prob">${(100/odds).toFixed(1)}% šance</div>`;
+
+    const btn = document.createElement('button');
+    btn.className = 'add-btn';
+    btn.textContent = sel ? '✓' : '+';
+
+    row.appendChild(info); row.appendChild(gap); row.appendChild(oddsDiv); row.appendChild(btn);
+    row.onclick = () => { toggleOpp(opp, odds); };
+    list.appendChild(row);
+  });
+}
+
+function toggleOpp(opp, odds) {
+  const idx = ticket.findIndex(t => t.name === opp.name);
+  if (idx >= 0) ticket.splice(idx, 1); else ticket.push({ name: opp.name, odds });
+  renderOpponents(); renderTicket();
+}
+
+// ── TICKET ──
+function renderTicket() {
+  const empty = $('ticketEmpty'), items = $('ticketItems'), form = $('ticketForm');
+  if (ticket.length === 0) {
+    empty.style.display = 'block'; items.innerHTML = ''; form.style.display = 'none'; return;
+  }
+  empty.style.display = 'none'; form.style.display = 'block';
+  items.innerHTML = '';
+  ticket.forEach((t, i) => {
+    const div = document.createElement('div'); div.className = 'ticket-item';
+    const nameDiv = document.createElement('div');
+    nameDiv.innerHTML = `<div class="ti-name">Šimůnek vs ${esc(t.name)}</div><div class="ti-vs">výhra Šimůnka</div>`;
+    const oddsSpan = document.createElement('span'); oddsSpan.className = 'ti-odds'; oddsSpan.textContent = t.odds.toFixed(2);
+    const rmBtn = document.createElement('button'); rmBtn.className = 'ti-remove'; rmBtn.textContent = '✕';
+    rmBtn.onclick = e => { e.stopPropagation(); ticket.splice(i, 1); renderOpponents(); renderTicket(); };
+    div.appendChild(nameDiv); div.appendChild(oddsSpan); div.appendChild(rmBtn);
+    items.appendChild(div);
+  });
+  updateCalc(); renderSubmitArea();
+}
+
+function renderSubmitArea() {
+  const area = $('submitArea'); if (!area) return;
+  if (!firebaseReady) {
+    area.innerHTML = `<div class="login-cta"><p>Nakonfiguruj Firebase výše pro ukládání tiketů.</p></div>`; return;
+  }
+  if (!currentUser) {
+    area.innerHTML = `<div class="login-cta"><p>Přihlas se přes Google pro potvrzení tiketu a uložení do historie.</p><button class="btn-login-small" onclick="showLogin()">PŘIHLÁSIT SE</button></div>`; return;
+  }
+  area.innerHTML = `<button class="submit-btn" onclick="submitTicket()">POTVRDIT TIKET</button>`;
+}
+
+function getCombo() { return ticket.reduce((a, t) => a * t.odds, 1); }
+
+function updateCalc() {
+  const combo = getCombo();
+  const el = $('comboOdds'); if (el) el.textContent = combo.toFixed(2);
+  const stake = parseInt($('betAmount').value);
+  const fee = Math.round(stake * 0.1), net = stake - fee, win = Math.round(net * combo);
+  $('amountDisplay').textContent = stake + ' Kč';
+  $('p-stake').textContent = stake + ' Kč';
+  $('p-fee').textContent = fee + ' Kč';
+  $('p-net').textContent = net + ' Kč';
+  $('p-win').textContent = win + ' Kč';
+}
+
+$('betAmount').addEventListener('input', updateCalc);
+
+// ── SUBMIT ──
+window.submitTicket = async () => {
+  if (!currentUser) { showLogin(); return; }
+  const name = $('betName').value.trim();
+  if (!name) { $('betName').focus(); showToast('Zadej jméno sázkaře!'); return; }
+
+  const stake = parseInt($('betAmount').value);
+  if (stake < 20 || stake > 200) { showToast('Vklad musí být mezi 20 a 200 Kč!'); return; }
+
+  const fee = Math.round(stake * 0.1), net = stake - fee;
+  const combo = getCombo(), win = Math.round(net * combo);
+  const ref = 'BB-' + Math.floor(100000 + Math.random() * 900000);
+
+  const btn = document.querySelector('.submit-btn');
+  if (btn) { btn.disabled = true; btn.textContent = 'UKLÁDÁM...'; }
+
+  try {
+    await addDoc(collection(db, 'tickets'), {
+      uid: currentUser.uid,
+      userName: currentUser.displayName || currentUser.email,
+      ref, bettor: name, stake, fee, net, combo: combo.toFixed(2), payout: win,
+      matches: ticket.map(t => ({ name: t.name, odds: t.odds })),
+      createdAt: serverTimestamp(),
+    });
+  } catch(e) {
+    showToast('Chyba ukládání: ' + e.message);
+    if (btn) { btn.disabled = false; btn.textContent = 'POTVRDIT TIKET'; }
+    return;
+  }
+
+  if (btn) { btn.disabled = false; btn.textContent = 'POTVRDIT TIKET'; }
+
+  // Show confirm
+  $('c-ref').textContent = 'REF: ' + ref;
+  $('c-name').textContent = name;
+  const cm = $('c-matches'); cm.innerHTML = '';
+  ticket.forEach(t => {
+    const row = document.createElement('div'); row.className = 'confirm-match';
+    const l = document.createElement('span'); l.textContent = 'Šimůnek vs ' + t.name;
+    const r = document.createElement('span'); r.textContent = t.odds.toFixed(2);
+    row.appendChild(l); row.appendChild(r); cm.appendChild(row);
+  });
+  $('c-amt').textContent = win + ' Kč';
+  $('confirmOverlay').classList.add('active');
+  loadHistory();
+};
+
+window.closeConfirm = () => {
+  $('confirmOverlay').classList.remove('active');
+  ticket = []; renderOpponents(); renderTicket();
+};
+
+// ── BOOT ──
+tryInitFirebase();
+renderOpponents();
+renderTicket();
+</script>
+</body>
+</html>
