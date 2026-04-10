@@ -6,171 +6,239 @@
 <title>BIZON BET</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --navy: #0d1f35; --navy2: #162c47;
-    --gold: #d4a843; --gold2: #f0c96a;
-    --red: #c0392b; --green: #1e8c4e;
-    --bg: #0a1929; --card: #111f30;
-    --border: rgba(212,168,67,0.2);
-    --text: #e8dfc8; --muted: rgba(232,223,200,0.45);
-    --ticket-bg: #faf6ec; --ticket-text: #1a1208;
-    --ticket-muted: #7a6a4a; --ticket-border: #d4c89a;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--bg); font-family: 'DM Sans', sans-serif; color: var(--text); min-height: 100vh;
-    background-image: radial-gradient(ellipse at 20% 0%, rgba(212,168,67,0.07) 0%, transparent 60%), radial-gradient(ellipse at 80% 100%, rgba(13,31,53,0.8) 0%, transparent 60%); }
+:root {
+  --navy:#0d1f35;--navy2:#162c47;--gold:#d4a843;--gold2:#f0c96a;
+  --red:#c0392b;--green:#1e8c4e;--bg:#0a1929;--card:#111f30;
+  --border:rgba(212,168,67,0.2);--text:#e8dfc8;--muted:rgba(232,223,200,0.45);
+  --ticket-bg:#faf6ec;--ticket-text:#1a1208;--ticket-muted:#7a6a4a;--ticket-border:#d4c89a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);font-family:'DM Sans',sans-serif;color:var(--text);min-height:100vh;
+  background-image:radial-gradient(ellipse at 20% 0%,rgba(212,168,67,.07) 0%,transparent 60%),radial-gradient(ellipse at 80% 100%,rgba(13,31,53,.8) 0%,transparent 60%);}
 
-  /* HEADER */
-  header { background: var(--navy); border-bottom: 2px solid var(--gold); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 64px; position: sticky; top: 0; z-index: 100; }
-  .logo { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 3px; color: var(--gold); display: flex; align-items: center; gap: 10px; }
-  .logo-sub { font-size: 0.55rem; letter-spacing: 4px; color: var(--muted); font-family: 'DM Mono', monospace; margin-top: -4px; }
-  .header-right { display: flex; align-items: center; gap: 12px; }
-  .header-badge { background: rgba(212,168,67,0.12); border: 1px solid var(--border); border-radius: 4px; padding: 4px 12px; font-size: 0.7rem; font-family: 'DM Mono', monospace; color: var(--gold); letter-spacing: 1px; }
-  #authArea { display: flex; align-items: center; gap: 8px; }
-  .user-pill { display: flex; align-items: center; gap: 8px; background: rgba(212,168,67,0.1); border: 1px solid var(--border); border-radius: 20px; padding: 4px 12px 4px 6px; font-size: 0.75rem; color: var(--text); }
-  .user-pill img { width: 24px; height: 24px; border-radius: 50%; object-fit: cover; }
-  .user-pill .u-avatar { width: 24px; height: 24px; border-radius: 50%; background: var(--gold); display: inline-flex; align-items: center; justify-content: center; font-size: 0.7rem; color: var(--navy); font-weight: 600; }
-  .u-name { max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .btn-auth { background: transparent; border: 1px solid var(--border); border-radius: 4px; padding: 5px 12px; font-size: 0.7rem; color: var(--muted); cursor: pointer; font-family: 'DM Mono', monospace; letter-spacing: 1px; transition: border-color 0.15s, color 0.15s; }
-  .btn-auth:hover { border-color: var(--gold); color: var(--gold); }
-  .btn-auth.primary { color: var(--gold); border-color: var(--gold); }
+/* HEADER */
+header{background:var(--navy);border-bottom:2px solid var(--gold);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:100;}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:3px;color:var(--gold);display:flex;align-items:center;gap:10px;}
+.logo-sub{font-size:.55rem;letter-spacing:4px;color:var(--muted);font-family:'DM Mono',monospace;margin-top:-4px;}
+.header-right{display:flex;align-items:center;gap:10px;}
+.header-badge{background:rgba(212,168,67,.12);border:1px solid var(--border);border-radius:4px;padding:4px 12px;font-size:.7rem;font-family:'DM Mono',monospace;color:var(--gold);letter-spacing:1px;}
+.match-date-badge{background:rgba(212,168,67,.2);border:1px solid var(--gold);border-radius:4px;padding:4px 12px;font-size:.72rem;font-family:'DM Mono',monospace;color:var(--gold2);letter-spacing:1px;display:none;}
+#authArea{display:flex;align-items:center;gap:8px;}
+.user-pill{display:flex;align-items:center;gap:8px;background:rgba(212,168,67,.1);border:1px solid var(--border);border-radius:20px;padding:4px 12px 4px 6px;font-size:.75rem;color:var(--text);}
+.user-pill img{width:24px;height:24px;border-radius:50%;object-fit:cover;}
+.u-avatar{width:24px;height:24px;border-radius:50%;background:var(--gold);display:inline-flex;align-items:center;justify-content:center;font-size:.7rem;color:var(--navy);font-weight:600;}
+.u-name{max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.btn-auth{background:transparent;border:1px solid var(--border);border-radius:4px;padding:5px 12px;font-size:.7rem;color:var(--muted);cursor:pointer;font-family:'DM Mono',monospace;letter-spacing:1px;transition:border-color .15s,color .15s;}
+.btn-auth:hover{border-color:var(--gold);color:var(--gold);}
+.btn-auth.primary{color:var(--gold);border-color:var(--gold);}
+.btn-admin{background:rgba(212,168,67,.15);border:1px solid var(--gold);border-radius:4px;padding:5px 12px;font-size:.7rem;color:var(--gold);cursor:pointer;font-family:'DM Mono',monospace;letter-spacing:1px;transition:background .15s;}
+.btn-admin:hover{background:rgba(212,168,67,.3);}
 
-  /* LOGIN SCREEN */
-  #loginScreen { display: none; position: fixed; inset: 0; z-index: 300; background: rgba(10,25,41,0.97); align-items: center; justify-content: center; }
-  #loginScreen.active { display: flex; }
-  .login-box { background: var(--card); border: 1px solid var(--border); border-top: 3px solid var(--gold); border-radius: 12px; padding: 2.5rem 2rem; max-width: 360px; width: 90%; text-align: center; }
-  .login-logo { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: var(--gold); letter-spacing: 4px; }
-  .login-sub-txt { font-size: 0.6rem; color: var(--muted); letter-spacing: 3px; font-family: 'DM Mono', monospace; margin-bottom: 2rem; }
-  .login-title { font-size: 0.85rem; color: var(--text); margin-bottom: 1.5rem; }
-  .btn-oauth { width: 100%; padding: 11px 16px; border-radius: 6px; border: 1px solid var(--border); background: var(--navy2); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 0.88rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 10px; transition: border-color 0.15s, background 0.15s; }
-  .btn-oauth:hover { border-color: var(--gold); background: rgba(212,168,67,0.08); }
-  .btn-oauth svg { width: 20px; height: 20px; flex-shrink: 0; }
-  .login-note { font-size: 0.62rem; color: var(--muted); margin-top: 1.5rem; line-height: 1.7; font-family: 'DM Mono', monospace; }
+/* LAYOUT */
+.layout{display:grid;grid-template-columns:1fr 360px;gap:0;max-width:1100px;margin:0 auto;padding:2rem 1rem;align-items:start;}
+@media(max-width:780px){.layout{grid-template-columns:1fr;}}
+.left-panel{padding-right:2rem;}
 
-  /* LAYOUT */
-  .layout { display: grid; grid-template-columns: 1fr 360px; gap: 0; max-width: 1100px; margin: 0 auto; padding: 2rem 1rem; align-items: start; }
-  @media (max-width: 780px) { .layout { grid-template-columns: 1fr; } }
-  .left-panel { padding-right: 2rem; }
+/* MATCH SELECTOR */
+.match-selector{margin-bottom:1.5rem;}
+.match-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1rem;}
+.match-tab{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:8px 14px;cursor:pointer;transition:border-color .15s,background .15s;text-align:left;}
+.match-tab:hover{border-color:var(--gold);background:rgba(212,168,67,.06);}
+.match-tab.active{border-color:var(--gold);background:rgba(212,168,67,.15);box-shadow:inset 3px 0 0 var(--gold);}
+.mt-name{font-size:.85rem;font-weight:500;color:var(--text);}
+.mt-date{font-size:.65rem;color:var(--gold);font-family:'DM Mono',monospace;margin-top:2px;}
+.mt-status{font-size:.6rem;color:var(--muted);font-family:'DM Mono',monospace;}
+.no-matches{background:var(--card);border:1px dashed var(--border);border-radius:8px;padding:2rem;text-align:center;color:var(--muted);font-family:'DM Mono',monospace;font-size:.75rem;}
 
-  /* SETUP BANNER */
-  .setup-banner { background: rgba(212,168,67,0.08); border: 1px solid rgba(212,168,67,0.35); border-radius: 8px; padding: 1.2rem 1.5rem; margin-bottom: 1.5rem; }
-  .setup-banner h3 { font-family: 'Bebas Neue', sans-serif; color: var(--gold); letter-spacing: 2px; font-size: 1.1rem; margin-bottom: 0.5rem; }
-  .setup-banner p { font-size: 0.72rem; color: var(--text); line-height: 1.8; margin-bottom: 0.4rem; font-family: 'DM Mono', monospace; }
-  .setup-banner a { color: var(--gold2); }
-  .setup-banner strong { color: var(--gold2); }
-  .config-inputs { display: grid; gap: 6px; margin-top: 0.75rem; }
-  .config-input { width: 100%; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 4px; padding: 7px 10px; font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--text); outline: none; transition: border-color 0.15s; }
-  .config-input:focus { border-color: var(--gold); }
-  .config-input::placeholder { color: var(--muted); }
-  .btn-configure { margin-top: 8px; background: var(--gold); color: var(--navy); border: none; border-radius: 4px; padding: 8px 20px; font-family: 'Bebas Neue', sans-serif; font-size: 0.95rem; letter-spacing: 2px; cursor: pointer; transition: background 0.15s; }
-  .btn-configure:hover { background: var(--gold2); }
+/* PLAYER SELECTOR */
+.player-selector{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1rem;}
+.player-btn{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:7px 12px;cursor:pointer;display:flex;flex-direction:column;align-items:flex-start;transition:border-color .15s,background .15s;}
+.player-btn:hover{border-color:var(--gold);background:rgba(212,168,67,.06);}
+.player-btn.active{border-color:var(--gold);background:rgba(212,168,67,.15);box-shadow:inset 3px 0 0 var(--gold);}
+.pb-name{font-size:.8rem;font-weight:500;color:var(--text);white-space:nowrap;}
+.pb-str{font-size:.62rem;color:var(--gold);font-family:'DM Mono',monospace;margin-top:2px;}
 
-  /* PLAYER SELECTOR */
-  .player-selector { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1rem; }
-  .player-btn { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 7px 12px; cursor: pointer; display: flex; flex-direction: column; align-items: flex-start; transition: border-color 0.15s, background 0.15s; }
-  .player-btn:hover { border-color: var(--gold); background: rgba(212,168,67,0.06); }
-  .player-btn.active { border-color: var(--gold); background: rgba(212,168,67,0.15); box-shadow: inset 3px 0 0 var(--gold); }
-  .pb-name { font-size: 0.8rem; font-weight: 500; color: var(--text); white-space: nowrap; }
-  .pb-str { font-size: 0.62rem; color: var(--gold); font-family: 'DM Mono', monospace; margin-top: 2px; }
+/* PLAYER CARD */
+.player-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.2rem 1.5rem;margin-bottom:1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.player-info h2{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:2px;color:var(--gold);}
+.player-info .club{font-size:.72rem;color:var(--muted);font-family:'DM Mono',monospace;margin-top:2px;}
+.player-stats{display:flex;gap:1.5rem;}
+.stat .val{font-family:'DM Mono',monospace;font-size:1.2rem;font-weight:500;color:var(--gold2);}
+.stat .lbl{font-size:.62rem;color:var(--muted);letter-spacing:1px;margin-top:2px;}
+.section-title{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:3px;color:var(--gold);margin-bottom:.75rem;opacity:.8;}
 
-  /* PLAYER CARD */
-  .player-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1.2rem 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
-  .player-info h2 { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 2px; color: var(--gold); }
-  .player-info .club { font-size: 0.72rem; color: var(--muted); font-family: 'DM Mono', monospace; margin-top: 2px; }
-  .player-stats { display: flex; gap: 1.5rem; }
-  .stat .val { font-family: 'DM Mono', monospace; font-size: 1.2rem; font-weight: 500; color: var(--gold2); }
-  .stat .lbl { font-size: 0.62rem; color: var(--muted); letter-spacing: 1px; margin-top: 2px; }
-  .section-title { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 3px; color: var(--gold); margin-bottom: 0.75rem; opacity: 0.8; }
+/* OPPONENTS */
+.opponents-list{display:flex;flex-direction:column;gap:6px;}
+.opp-row{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:.85rem 1.1rem;display:grid;grid-template-columns:1fr auto auto auto;align-items:center;gap:1rem;cursor:pointer;transition:border-color .15s,background .15s,transform .1s;user-select:none;}
+.opp-row:hover{border-color:var(--gold);background:rgba(212,168,67,.06);transform:translateX(2px);}
+.opp-row.selected{border-color:var(--gold);background:rgba(212,168,67,.12);box-shadow:inset 3px 0 0 var(--gold);}
+.opp-name{font-size:.92rem;font-weight:500;}
+.opp-meta{font-size:.68rem;color:var(--muted);font-family:'DM Mono',monospace;margin-top:2px;}
+.str-gap{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted);text-align:center;}
+.str-gap .gap-val{display:block;font-size:.62rem;}
+.odds-display{text-align:right;}
+.odds-val{font-family:'Bebas Neue',sans-serif;font-size:1.55rem;letter-spacing:1px;line-height:1;}
+.odds-prob{font-size:.62rem;color:var(--muted);font-family:'DM Mono',monospace;}
+.color-green{color:#4ec67a;}.color-amber{color:#e8a830;}.color-red{color:#e05050;}
+.add-btn{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--border);background:transparent;color:var(--gold);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s,border-color .15s;flex-shrink:0;}
+.opp-row:hover .add-btn,.opp-row.selected .add-btn{background:var(--gold);color:var(--navy);border-color:var(--gold);}
+.hint{font-size:.68rem;color:var(--muted);font-family:'DM Mono',monospace;margin-top:.75rem;text-align:center;}
 
-  /* OPPONENTS */
-  .opponents-list { display: flex; flex-direction: column; gap: 6px; }
-  .opp-row { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 0.85rem 1.1rem; display: grid; grid-template-columns: 1fr auto auto auto; align-items: center; gap: 1rem; cursor: pointer; transition: border-color 0.15s, background 0.15s, transform 0.1s; user-select: none; }
-  .opp-row:hover { border-color: var(--gold); background: rgba(212,168,67,0.06); transform: translateX(2px); }
-  .opp-row.selected { border-color: var(--gold); background: rgba(212,168,67,0.12); box-shadow: inset 3px 0 0 var(--gold); }
-  .opp-name { font-size: 0.92rem; font-weight: 500; }
-  .opp-meta { font-size: 0.68rem; color: var(--muted); font-family: 'DM Mono', monospace; margin-top: 2px; }
-  .str-gap { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted); text-align: center; }
-  .str-gap .gap-val { display: block; font-size: 0.62rem; }
-  .odds-display { text-align: right; }
-  .odds-val { font-family: 'Bebas Neue', sans-serif; font-size: 1.55rem; letter-spacing: 1px; line-height: 1; }
-  .odds-prob { font-size: 0.62rem; color: var(--muted); font-family: 'DM Mono', monospace; }
-  .color-green { color: #4ec67a; } .color-amber { color: #e8a830; } .color-red { color: #e05050; }
-  .add-btn { width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid var(--border); background: transparent; color: var(--gold); font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.15s, border-color 0.15s; flex-shrink: 0; }
-  .opp-row:hover .add-btn, .opp-row.selected .add-btn { background: var(--gold); color: var(--navy); border-color: var(--gold); }
-  .hint { font-size: 0.68rem; color: var(--muted); font-family: 'DM Mono', monospace; margin-top: 0.75rem; text-align: center; }
+/* HISTORY */
+.history-section{margin-top:2rem;}
+.history-item{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:.75rem 1rem;margin-bottom:8px;font-family:'DM Mono',monospace;}
+.hi-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;}
+.hi-ref{font-size:.65rem;color:var(--gold);letter-spacing:1px;}
+.hi-date{font-size:.6rem;color:var(--muted);}
+.hi-matches{font-size:.68rem;color:var(--muted);margin-bottom:4px;}
+.hi-footer{display:flex;justify-content:space-between;font-size:.7rem;}
+.hi-combo{color:var(--text);}.hi-payout{color:var(--gold2);}
 
-  /* HISTORY */
-  .history-section { margin-top: 2rem; }
-  .history-item { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 8px; font-family: 'DM Mono', monospace; }
-  .hi-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
-  .hi-ref { font-size: 0.65rem; color: var(--gold); letter-spacing: 1px; }
-  .hi-date { font-size: 0.6rem; color: var(--muted); }
-  .hi-matches { font-size: 0.68rem; color: var(--muted); margin-bottom: 4px; }
-  .hi-footer { display: flex; justify-content: space-between; font-size: 0.7rem; }
-  .hi-combo { color: var(--text); } .hi-payout { color: var(--gold2); }
+/* TICKET */
+.ticket-panel{position:sticky;top:80px;}
+.ticket{background:var(--ticket-bg);border-radius:8px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.5);font-family:'DM Mono',monospace;}
+.ticket-header{background:var(--navy);padding:1rem 1.2rem;text-align:center;border-bottom:3px solid var(--gold);}
+.t-logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:3px;color:var(--gold);}
+.t-sub{font-size:.6rem;color:rgba(255,255,255,.4);letter-spacing:2px;margin-top:2px;}
+.t-match-info{font-size:.65rem;color:var(--gold2);font-family:'DM Mono',monospace;margin-top:4px;opacity:.8;}
+.ticket-body{padding:1rem 1.2rem;}
+.ticket-empty{text-align:center;color:var(--ticket-muted);font-size:.75rem;padding:2rem 0;letter-spacing:1px;}
+.ticket-empty .icon{font-size:2rem;display:block;margin-bottom:.5rem;opacity:.4;}
+.ticket-item{border-bottom:1px dashed var(--ticket-border);padding:.6rem 0;display:flex;justify-content:space-between;align-items:center;gap:.5rem;}
+.ticket-item:last-child{border-bottom:none;}
+.ti-name{font-size:.75rem;color:var(--ticket-text);flex:1;}
+.ti-vs{font-size:.6rem;color:var(--ticket-muted);}
+.ti-odds{font-size:.9rem;font-weight:500;color:var(--navy);}
+.ti-remove{background:none;border:none;cursor:pointer;color:var(--ticket-muted);font-size:.9rem;padding:0 2px;transition:color .1s;}
+.ti-remove:hover{color:var(--red);}
+.ticket-divider{border:none;border-top:2px dashed var(--ticket-border);margin:.75rem 0;}
+.ticket-combo{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.5rem;}
+.tc-label{font-size:.65rem;color:var(--ticket-muted);letter-spacing:1px;}
+.tc-val{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--navy);letter-spacing:1px;}
+.ticket-form{margin-top:.5rem;}
+.form-row{margin-bottom:.75rem;}
+.form-row label{display:block;font-size:.6rem;color:var(--ticket-muted);letter-spacing:1px;margin-bottom:4px;}
+.form-row input[type=text]{width:100%;background:#fff;border:1.5px solid var(--ticket-border);border-radius:4px;padding:7px 10px;font-family:'DM Mono',monospace;font-size:.85rem;color:var(--ticket-text);outline:none;transition:border-color .15s;}
+.form-row input[type=text]:focus{border-color:var(--navy);}
+.form-row input[type=range]{width:100%;accent-color:var(--navy);cursor:pointer;}
+.range-row{display:flex;align-items:center;gap:10px;}
+.range-row input{flex:1;}
+.range-val{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--navy);min-width:60px;text-align:right;}
+.payout-box{background:var(--navy);border-radius:6px;padding:.9rem 1rem;margin:.75rem 0;}
+.payout-row{display:flex;justify-content:space-between;margin-bottom:4px;}
+.payout-label{font-size:.65rem;color:rgba(255,255,255,.5);letter-spacing:1px;}
+.payout-val{font-size:.75rem;color:rgba(255,255,255,.7);}
+.payout-row.total{margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.1);}
+.payout-row.total .payout-label{color:var(--gold);}
+.payout-row.total .payout-val{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--gold);letter-spacing:1px;line-height:1;}
+.submit-btn{width:100%;background:var(--gold);color:var(--navy);border:none;border-radius:6px;padding:12px;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:2px;cursor:pointer;transition:background .15s,transform .1s;}
+.submit-btn:hover{background:var(--gold2);transform:translateY(-1px);}
+.submit-btn:disabled{opacity:.45;cursor:not-allowed;transform:none;}
+.login-cta{text-align:center;padding:1rem 0;}
+.login-cta p{font-size:.72rem;color:var(--ticket-muted);margin-bottom:.75rem;line-height:1.6;}
+.btn-login-small{background:var(--navy);color:var(--gold);border:none;border-radius:6px;padding:9px 20px;font-family:'Bebas Neue',sans-serif;font-size:.95rem;letter-spacing:2px;cursor:pointer;}
 
-  /* TICKET */
-  .ticket-panel { position: sticky; top: 80px; }
-  .ticket { background: var(--ticket-bg); border-radius: 8px; overflow: hidden; box-shadow: 0 8px 40px rgba(0,0,0,0.5); font-family: 'DM Mono', monospace; }
-  .ticket-header { background: var(--navy); padding: 1rem 1.2rem; text-align: center; border-bottom: 3px solid var(--gold); }
-  .t-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 3px; color: var(--gold); }
-  .t-sub { font-size: 0.6rem; color: rgba(255,255,255,0.4); letter-spacing: 2px; margin-top: 2px; }
-  .ticket-body { padding: 1rem 1.2rem; }
-  .ticket-empty { text-align: center; color: var(--ticket-muted); font-size: 0.75rem; padding: 2rem 0; letter-spacing: 1px; }
-  .ticket-empty .icon { font-size: 2rem; display: block; margin-bottom: 0.5rem; opacity: 0.4; }
-  .ticket-item { border-bottom: 1px dashed var(--ticket-border); padding: 0.6rem 0; display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; }
-  .ticket-item:last-child { border-bottom: none; }
-  .ti-name { font-size: 0.75rem; color: var(--ticket-text); flex: 1; }
-  .ti-vs { font-size: 0.6rem; color: var(--ticket-muted); }
-  .ti-odds { font-size: 0.9rem; font-weight: 500; color: var(--navy); }
-  .ti-remove { background: none; border: none; cursor: pointer; color: var(--ticket-muted); font-size: 0.9rem; padding: 0 2px; transition: color 0.1s; }
-  .ti-remove:hover { color: var(--red); }
-  .ticket-divider { border: none; border-top: 2px dashed var(--ticket-border); margin: 0.75rem 0; }
-  .ticket-combo { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem; }
-  .tc-label { font-size: 0.65rem; color: var(--ticket-muted); letter-spacing: 1px; }
-  .tc-val { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--navy); letter-spacing: 1px; }
-  .ticket-form { margin-top: 0.5rem; }
-  .form-row { margin-bottom: 0.75rem; }
-  .form-row label { display: block; font-size: 0.6rem; color: var(--ticket-muted); letter-spacing: 1px; margin-bottom: 4px; }
-  .form-row input[type=text] { width: 100%; background: #fff; border: 1.5px solid var(--ticket-border); border-radius: 4px; padding: 7px 10px; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--ticket-text); outline: none; transition: border-color 0.15s; }
-  .form-row input[type=text]:focus { border-color: var(--navy); }
-  .form-row input[type=range] { width: 100%; accent-color: var(--navy); cursor: pointer; }
-  .range-row { display: flex; align-items: center; gap: 10px; }
-  .range-row input { flex: 1; }
-  .range-val { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; color: var(--navy); min-width: 60px; text-align: right; }
-  .payout-box { background: var(--navy); border-radius: 6px; padding: 0.9rem 1rem; margin: 0.75rem 0; }
-  .payout-row { display: flex; justify-content: space-between; margin-bottom: 4px; }
-  .payout-label { font-size: 0.65rem; color: rgba(255,255,255,0.5); letter-spacing: 1px; }
-  .payout-val { font-size: 0.75rem; color: rgba(255,255,255,0.7); }
-  .payout-row.total { margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.1); }
-  .payout-row.total .payout-label { color: var(--gold); }
-  .payout-row.total .payout-val { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; color: var(--gold); letter-spacing: 1px; line-height: 1; }
-  .submit-btn { width: 100%; background: var(--gold); color: var(--navy); border: none; border-radius: 6px; padding: 12px; font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 2px; cursor: pointer; transition: background 0.15s, transform 0.1s; }
-  .submit-btn:hover { background: var(--gold2); transform: translateY(-1px); }
-  .submit-btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
-  .login-cta { text-align: center; padding: 1rem 0; }
-  .login-cta p { font-size: 0.72rem; color: var(--ticket-muted); margin-bottom: 0.75rem; line-height: 1.6; }
-  .btn-login-small { background: var(--navy); color: var(--gold); border: none; border-radius: 6px; padding: 9px 20px; font-family: 'Bebas Neue', sans-serif; font-size: 0.95rem; letter-spacing: 2px; cursor: pointer; transition: background 0.15s; }
-  .btn-login-small:hover { background: var(--navy2); }
+/* LOGIN SCREEN */
+#loginScreen{display:none;position:fixed;inset:0;z-index:300;background:rgba(10,25,41,.97);align-items:center;justify-content:center;}
+#loginScreen.active{display:flex;}
+.login-box{background:var(--card);border:1px solid var(--border);border-top:3px solid var(--gold);border-radius:12px;padding:2.5rem 2rem;max-width:360px;width:90%;text-align:center;}
+.login-logo{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--gold);letter-spacing:4px;}
+.login-sub-txt{font-size:.6rem;color:var(--muted);letter-spacing:3px;font-family:'DM Mono',monospace;margin-bottom:2rem;}
+.login-title{font-size:.85rem;color:var(--text);margin-bottom:1.5rem;}
+.btn-oauth{width:100%;padding:11px 16px;border-radius:6px;border:1px solid var(--border);background:var(--navy2);color:var(--text);font-family:'DM Sans',sans-serif;font-size:.88rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:10px;transition:border-color .15s,background .15s;}
+.btn-oauth:hover{border-color:var(--gold);background:rgba(212,168,67,.08);}
+.btn-oauth svg{width:20px;height:20px;flex-shrink:0;}
+.login-note{font-size:.62rem;color:var(--muted);margin-top:1.5rem;line-height:1.7;font-family:'DM Mono',monospace;}
 
-  /* CONFIRMATION */
-  .confirm-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 200; align-items: center; justify-content: center; }
-  .confirm-overlay.active { display: flex; }
-  .confirm-box { background: var(--ticket-bg); border-radius: 12px; padding: 2rem; max-width: 360px; width: 90%; text-align: center; font-family: 'DM Mono', monospace; box-shadow: 0 20px 60px rgba(0,0,0,0.5); border-top: 4px solid var(--gold); }
-  .c-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--navy); letter-spacing: 3px; margin-bottom: 0.2rem; }
-  .c-ref { font-size: 0.65rem; color: var(--ticket-muted); letter-spacing: 2px; margin-bottom: 1.5rem; }
-  .c-name { font-size: 1rem; font-weight: 600; color: var(--navy); margin-bottom: 0.5rem; }
-  .confirm-matches { text-align: left; margin: 1rem 0; border-top: 1px dashed var(--ticket-border); border-bottom: 1px dashed var(--ticket-border); padding: 0.75rem 0; }
-  .confirm-match { font-size: 0.72rem; color: var(--ticket-text); padding: 3px 0; display: flex; justify-content: space-between; }
-  .c-payout { background: var(--navy); border-radius: 6px; padding: 0.75rem 1rem; margin: 1rem 0; display: flex; justify-content: space-between; align-items: center; }
-  .c-payout .lbl { font-size: 0.6rem; color: rgba(255,255,255,0.5); letter-spacing: 1px; }
-  .c-payout .amt { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--gold); letter-spacing: 1px; }
-  .c-note { font-size: 0.62rem; color: var(--ticket-muted); margin-bottom: 1rem; line-height: 1.6; }
-  .c-close { background: var(--navy); color: var(--gold); border: none; border-radius: 6px; padding: 10px 24px; font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 2px; cursor: pointer; }
+/* CONFIRM */
+.confirm-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:200;align-items:center;justify-content:center;}
+.confirm-overlay.active{display:flex;}
+.confirm-box{background:var(--ticket-bg);border-radius:12px;padding:2rem;max-width:360px;width:90%;text-align:center;font-family:'DM Mono',monospace;box-shadow:0 20px 60px rgba(0,0,0,.5);border-top:4px solid var(--gold);}
+.c-logo{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--navy);letter-spacing:3px;margin-bottom:.2rem;}
+.c-ref{font-size:.65rem;color:var(--ticket-muted);letter-spacing:2px;margin-bottom:1.5rem;}
+.c-name{font-size:1rem;font-weight:600;color:var(--navy);margin-bottom:.5rem;}
+.confirm-matches{text-align:left;margin:1rem 0;border-top:1px dashed var(--ticket-border);border-bottom:1px dashed var(--ticket-border);padding:.75rem 0;}
+.confirm-match{font-size:.72rem;color:var(--ticket-text);padding:3px 0;display:flex;justify-content:space-between;}
+.c-payout{background:var(--navy);border-radius:6px;padding:.75rem 1rem;margin:1rem 0;display:flex;justify-content:space-between;align-items:center;}
+.c-payout .lbl{font-size:.6rem;color:rgba(255,255,255,.5);letter-spacing:1px;}
+.c-payout .amt{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--gold);letter-spacing:1px;}
+.c-note{font-size:.62rem;color:var(--ticket-muted);margin-bottom:1rem;line-height:1.6;}
+.c-close{background:var(--navy);color:var(--gold);border:none;border-radius:6px;padding:10px 24px;font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:2px;cursor:pointer;}
 
-  /* TOAST */
-  .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(80px); background: var(--navy); color: var(--gold); border: 1px solid var(--border); border-radius: 6px; padding: 10px 20px; font-family: 'DM Mono', monospace; font-size: 0.8rem; letter-spacing: 1px; z-index: 500; transition: transform 0.3s; pointer-events: none; white-space: nowrap; }
-  .toast.show { transform: translateX(-50%) translateY(0); }
+/* TOAST */
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(80px);background:var(--navy);color:var(--gold);border:1px solid var(--border);border-radius:6px;padding:10px 20px;font-family:'DM Mono',monospace;font-size:.8rem;letter-spacing:1px;z-index:500;transition:transform .3s;pointer-events:none;white-space:nowrap;}
+.toast.show{transform:translateX(-50%) translateY(0);}
+
+/* ═══════════════════════════════
+   ADMIN PANEL
+═══════════════════════════════ */
+#adminPanel{display:none;position:fixed;inset:0;z-index:400;background:var(--bg);overflow-y:auto;}
+#adminPanel.active{display:block;}
+.admin-header{background:var(--navy);border-bottom:2px solid var(--gold);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:10;}
+.admin-title{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:3px;color:var(--gold);}
+.admin-close{background:transparent;border:1px solid var(--border);border-radius:4px;padding:6px 14px;color:var(--muted);cursor:pointer;font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:1px;transition:all .15s;}
+.admin-close:hover{border-color:var(--gold);color:var(--gold);}
+.admin-content{max-width:900px;margin:0 auto;padding:2rem 1.5rem;}
+.admin-section{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.5rem;margin-bottom:1.5rem;}
+.admin-section h3{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px;color:var(--gold);margin-bottom:1rem;}
+.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:600px){.admin-grid{grid-template-columns:1fr;}}
+.admin-field{display:flex;flex-direction:column;gap:4px;}
+.admin-field label{font-size:.62rem;color:var(--muted);font-family:'DM Mono',monospace;letter-spacing:1px;}
+.admin-input{background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:4px;padding:8px 12px;font-family:'DM Mono',monospace;font-size:.82rem;color:var(--text);outline:none;transition:border-color .15s;width:100%;}
+.admin-input:focus{border-color:var(--gold);}
+.admin-input::placeholder{color:var(--muted);}
+.admin-btn{background:var(--gold);color:var(--navy);border:none;border-radius:6px;padding:10px 20px;font-family:'Bebas Neue',sans-serif;font-size:.95rem;letter-spacing:2px;cursor:pointer;transition:background .15s;margin-top:8px;}
+.admin-btn:hover{background:var(--gold2);}
+.admin-btn.secondary{background:transparent;border:1px solid var(--border);color:var(--muted);}
+.admin-btn.secondary:hover{border-color:var(--gold);color:var(--gold);background:transparent;}
+.admin-btn.danger{background:var(--red);color:#fff;}
+.admin-btn.danger:hover{background:#e74c3c;}
+.admin-btn:disabled{opacity:.4;cursor:not-allowed;}
+
+/* Match list in admin */
+.match-list-admin{display:flex;flex-direction:column;gap:8px;}
+.match-admin-row{background:rgba(0,0,0,.2);border:1px solid var(--border);border-radius:6px;padding:1rem 1.2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
+.mar-info{flex:1;}
+.mar-name{font-size:.95rem;font-weight:500;color:var(--text);}
+.mar-date{font-size:.68rem;color:var(--gold);font-family:'DM Mono',monospace;margin-top:2px;}
+.mar-meta{font-size:.65rem;color:var(--muted);font-family:'DM Mono',monospace;margin-top:2px;}
+.status-badge{font-size:.6rem;padding:3px 8px;border-radius:20px;font-family:'DM Mono',monospace;letter-spacing:1px;}
+.status-draft{background:rgba(186,117,23,.2);color:#e8a830;}
+.status-published{background:rgba(30,140,78,.2);color:#4ec67a;}
+.status-archived{background:rgba(100,100,100,.2);color:var(--muted);}
+.mar-actions{display:flex;gap:6px;flex-shrink:0;}
+.mar-btn{background:transparent;border:1px solid var(--border);border-radius:4px;padding:4px 10px;font-size:.65rem;font-family:'DM Mono',monospace;color:var(--muted);cursor:pointer;letter-spacing:1px;transition:all .15s;}
+.mar-btn:hover{border-color:var(--gold);color:var(--gold);}
+.mar-btn.pub{border-color:rgba(78,198,122,.4);color:#4ec67a;}
+.mar-btn.pub:hover{background:rgba(78,198,122,.1);}
+.mar-btn.del{border-color:rgba(192,57,43,.4);color:var(--red);}
+.mar-btn.del:hover{background:rgba(192,57,43,.1);}
+
+/* Players/opponents editor in admin */
+.person-list{display:flex;flex-direction:column;gap:6px;margin-bottom:12px;}
+.person-row{background:rgba(0,0,0,.2);border:1px solid var(--border);border-radius:4px;padding:8px 12px;display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.person-row .pr-name{font-size:.82rem;color:var(--text);flex:1;}
+.person-row .pr-str{font-size:.65rem;color:var(--gold);font-family:'DM Mono',monospace;}
+.person-row .pr-del{background:none;border:none;cursor:pointer;color:var(--red);font-size:.8rem;padding:0 4px;opacity:.6;}
+.person-row .pr-del:hover{opacity:1;}
+.add-person-row{display:grid;grid-template-columns:1fr 100px 80px auto;gap:8px;align-items:end;}
+@media(max-width:600px){.add-person-row{grid-template-columns:1fr 1fr;}}
+.fetch-btn{background:rgba(212,168,67,.15);border:1px solid var(--gold);border-radius:4px;padding:8px 10px;font-size:.65rem;font-family:'DM Mono',monospace;color:var(--gold);cursor:pointer;white-space:nowrap;letter-spacing:1px;transition:background .15s;}
+.fetch-btn:hover{background:rgba(212,168,67,.3);}
+.fetch-btn:disabled{opacity:.4;cursor:not-allowed;}
+
+/* Tab switcher in admin editor */
+.admin-tabs{display:flex;gap:0;margin-bottom:1rem;border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+.admin-tab{flex:1;padding:8px;background:transparent;border:none;color:var(--muted);cursor:pointer;font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:1px;transition:background .15s,color .15s;}
+.admin-tab.active{background:rgba(212,168,67,.15);color:var(--gold);}
+.admin-tab:hover:not(.active){background:rgba(255,255,255,.03);color:var(--text);}
+.tab-content{display:none;}
+.tab-content.active{display:block;}
+
+/* Loading spinner */
+.spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(212,168,67,.3);border-top-color:var(--gold);border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-right:6px;}
+@keyframes spin{to{transform:rotate(360deg);}}
 </style>
 </head>
 <body>
@@ -181,6 +249,7 @@
     <div><div>BIZON BET</div><div class="logo-sub">SÁZKOVÝ DŮM</div></div>
   </div>
   <div class="header-right">
+    <div class="match-date-badge" id="matchDateBadge">🏓 Čtvrtek 26. 3. 2025</div>
     <div class="header-badge">1. TŘÍDA A · 2025/2026</div>
     <div id="authArea">
       <button class="btn-auth primary" onclick="showLogin()">PŘIHLÁSIT SE</button>
@@ -191,25 +260,33 @@
 <div class="layout">
   <div class="left-panel">
 
-    <div id="setupBanner" style="display:none"></div>
-
-    <div class="section-title">VYBER HRÁČE TJ SLAVOJ PRAHA B</div>
-    <div id="playerSelector" class="player-selector"></div>
-
-    <div class="player-card">
-      <div class="player-info">
-        <h2 id="playerName">Šimůnek Ondřej</h2>
-        <div class="club" id="playerClub">TJ Slavoj Praha B</div>
-      </div>
-      <div class="player-stats">
-        <div class="stat"><div class="val" id="playerSTR">1512</div><div class="lbl">STR</div></div>
+    <!-- MATCH SELECTOR -->
+    <div class="match-selector">
+      <div class="section-title">VYBER ZÁPAS</div>
+      <div class="match-tabs" id="matchTabs">
+        <div class="no-matches">Načítám zápasy…</div>
       </div>
     </div>
 
-    <div class="section-title">SOUPEŘI Z TJ SOKOL NUSLE PRAHA A — KLIKNI PRO PŘIDÁNÍ DO TIKETU</div>
-    <div class="opponents-list" id="oppList"></div>
-    <div class="hint">Více zápasů = kurzy se násobí · Kombinovaný tiket</div>
+    <!-- PLAYER SELECTOR -->
+    <div id="playerSelectorWrap" style="display:none">
+      <div class="section-title">VYBER HRÁČE TJ SLAVOJ PRAHA B</div>
+      <div id="playerSelector" class="player-selector"></div>
+      <div class="player-card">
+        <div class="player-info">
+          <h2 id="playerName">–</h2>
+          <div class="club" id="playerClub">TJ Slavoj Praha B</div>
+        </div>
+        <div class="player-stats">
+          <div class="stat"><div class="val" id="playerSTR">–</div><div class="lbl">STR</div></div>
+        </div>
+      </div>
+      <div class="section-title" id="oppTitle">SOUPEŘI — KLIKNI PRO PŘIDÁNÍ DO TIKETU</div>
+      <div class="opponents-list" id="oppList"></div>
+      <div class="hint">Více zápasů = kurzy se násobí · Kombinovaný tiket</div>
+    </div>
 
+    <!-- HISTORY -->
     <div class="history-section" id="historySection" style="display:none">
       <div class="section-title" style="margin-top:0">MÉ TIKETY</div>
       <div id="historyList"></div>
@@ -222,11 +299,12 @@
       <div class="ticket-header">
         <div class="t-logo">🦬 BIZON BET</div>
         <div class="t-sub">TIKET · NEOFICIÁLNÍ · POUZE PRO SRANDU</div>
+        <div class="t-match-info" id="ticketMatchInfo"></div>
       </div>
       <div class="ticket-body">
         <div id="ticketEmpty" class="ticket-empty">
           <span class="icon">🏓</span>
-          Přidej zápasy z levého panelu
+          Vyber zápas a přidej soupeře
         </div>
         <div id="ticketItems"></div>
         <div id="ticketForm" style="display:none">
@@ -267,7 +345,7 @@
     <div class="login-logo">🦬 BIZON BET</div>
     <div class="login-sub-txt">SÁZKOVÝ DŮM</div>
     <div class="login-title">Přihlas se pro zadání tiketu</div>
-    <button class="btn-oauth" id="btnGoogle" onclick="signInGoogle()">
+    <button class="btn-oauth" onclick="signInGoogle()">
       <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
         <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
         <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
@@ -276,26 +354,125 @@
       </svg>
       Pokračovat s Google
     </button>
-
     <div class="login-note">Přihlášením souhlasíš, že je to jen pro srandu.<br>Žádné skutečné peníze zde nefigurují. 🦬</div>
     <br>
     <button class="btn-auth" onclick="hideLogin()" style="margin:0 auto;display:block">Zavřít</button>
   </div>
 </div>
 
-<!-- CONFIRMATION -->
+<!-- CONFIRM OVERLAY -->
 <div class="confirm-overlay" id="confirmOverlay">
   <div class="confirm-box">
     <div class="c-logo">🦬 BIZON BET</div>
     <div class="c-ref" id="c-ref">REF: BB-000000</div>
     <div class="c-name" id="c-name"></div>
     <div class="confirm-matches" id="c-matches"></div>
-    <div class="c-payout">
-      <div><div class="lbl">MOŽNÁ VÝHRA</div></div>
-      <div class="amt" id="c-amt"></div>
-    </div>
-    <div class="c-note">Tiket uložen do tvé historie. Věříme v Ondřeje! 🏓<br><small>Pouze pro zábavu — bez právní hodnoty.</small></div>
+    <div class="c-payout"><div><div class="lbl">MOŽNÁ VÝHRA</div></div><div class="amt" id="c-amt"></div></div>
+    <div class="c-note">Tiket uložen do tvé historie. Věříme v tým! 🏓<br><small>Pouze pro zábavu — bez právní hodnoty.</small></div>
     <button class="c-close" onclick="closeConfirm()">ZAVŘÍT</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════ ADMIN PANEL ═══════════════════════ -->
+<div id="adminPanel">
+  <div class="admin-header">
+    <div class="admin-title">🦬 BIZON BET — ADMIN</div>
+    <button class="admin-close" onclick="closeAdmin()">← ZPĚT NA SÁZKY</button>
+  </div>
+  <div class="admin-content">
+
+    <!-- TAB NAV -->
+    <div class="admin-tabs">
+      <button class="admin-tab active" onclick="switchAdminTab('matches')">ZÁPASY</button>
+      <button class="admin-tab" onclick="switchAdminTab('new')">NOVÝ ZÁPAS</button>
+    </div>
+
+    <!-- TAB: MATCHES -->
+    <div class="tab-content active" id="tab-matches">
+      <div class="admin-section">
+        <h3>Existující zápasy</h3>
+        <div class="match-list-admin" id="adminMatchList">
+          <div style="color:var(--muted);font-size:.75rem;font-family:'DM Mono',monospace">Načítám…</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: NEW MATCH -->
+    <div class="tab-content" id="tab-new">
+      <div class="admin-section">
+        <h3>Základní informace</h3>
+        <div class="admin-grid">
+          <div class="admin-field">
+            <label>NÁZEV SOUPEŘE (TÝMU)</label>
+            <input class="admin-input" id="newOppTeam" placeholder="TJ Sokol Nusle Praha A">
+          </div>
+          <div class="admin-field">
+            <label>DATUM ZÁPASU</label>
+            <input class="admin-input" type="date" id="newMatchDate">
+          </div>
+          <div class="admin-field">
+            <label>ČAS ZÁPASU (nepovinné)</label>
+            <input class="admin-input" type="time" id="newMatchTime" placeholder="18:00">
+          </div>
+          <div class="admin-field">
+            <label>MÍSTO (nepovinné)</label>
+            <input class="admin-input" id="newMatchVenue" placeholder="Hala Slavoj, Praha">
+          </div>
+        </div>
+      </div>
+
+      <div class="admin-section">
+        <h3>Naši hráči</h3>
+        <div class="person-list" id="newPlayerList"></div>
+        <div class="add-person-row">
+          <div class="admin-field">
+            <label>JMÉNO</label>
+            <input class="admin-input" id="newPlayerName" placeholder="Šimůnek Ondřej">
+          </div>
+          <div class="admin-field">
+            <label>STR RATING</label>
+            <input class="admin-input" id="newPlayerStr" placeholder="1512" type="number">
+          </div>
+          <div class="admin-field">
+            <label>STIS URL (nepovinné)</label>
+            <input class="admin-input" id="newPlayerUrl" placeholder="https://stis.ping-pong.cz/hrac-45780/…">
+          </div>
+          <div class="admin-field" style="justify-content:flex-end">
+            <button class="fetch-btn" onclick="fetchPlayerStr('new')">📡 NAČÍST STR</button>
+          </div>
+        </div>
+        <button class="admin-btn secondary" style="margin-top:10px" onclick="addPerson('player')">+ PŘIDAT HRÁČE</button>
+      </div>
+
+      <div class="admin-section">
+        <h3>Soupeři</h3>
+        <div class="person-list" id="newOpponentList"></div>
+        <div class="add-person-row">
+          <div class="admin-field">
+            <label>JMÉNO SOUPEŘE</label>
+            <input class="admin-input" id="newOppName" placeholder="Jelínek Šimon">
+          </div>
+          <div class="admin-field">
+            <label>STR RATING</label>
+            <input class="admin-input" id="newOppStr" placeholder="1669" type="number">
+          </div>
+          <div class="admin-field">
+            <label>STIS URL (nepovinné)</label>
+            <input class="admin-input" id="newOppUrl" placeholder="https://stis.ping-pong.cz/hrac-42554/…">
+          </div>
+          <div class="admin-field" style="justify-content:flex-end">
+            <button class="fetch-btn" onclick="fetchPlayerStr('opp')">📡 NAČÍST STR</button>
+          </div>
+        </div>
+        <button class="admin-btn secondary" style="margin-top:10px" onclick="addPerson('opponent')">+ PŘIDAT SOUPEŘE</button>
+      </div>
+
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <button class="admin-btn" onclick="saveMatch('draft')">💾 ULOŽIT JAKO DRAFT</button>
+        <button class="admin-btn" style="background:var(--green)" onclick="saveMatch('published')">🚀 PUBLIKOVAT IHNED</button>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -303,98 +480,71 @@
 
 <script type="module">
 import { initializeApp, getApps } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-import { getAuth, GoogleAuthProvider, OAuthProvider, signInWithPopup, signOut, onAuthStateChanged }
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged }
   from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
-import { getFirestore, collection, addDoc, query, where, orderBy, getDocs, serverTimestamp }
+import { getFirestore, collection, addDoc, updateDoc, deleteDoc, doc, query, where,
+  orderBy, getDocs, onSnapshot, serverTimestamp, getDoc }
   from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
-// ── DATA ──
-const TEAM_PLAYERS = [
-  { id: 'ondrej',   name: 'Šimůnek Ondřej',   str: 1512, w: 0,  l: 33, pct: 0.00,  club: 'TJ Slavoj Praha B' },
-  { id: 'veronika', name: 'Šimůnková Veronika',str: 1683, w: 14, l: 24, pct: 36.84, club: 'TJ Slavoj Praha B' },
-  { id: 'daniel',   name: 'Šindelář Daniel',   str: 1749, w: 32, l: 19, pct: 62.75, club: 'TJ Slavoj Praha B' },
-  { id: 'david',    name: 'Pospíšil David',     str: 1745, w: 27, l: 20, pct: 57.45, club: 'TJ Slavoj Praha B' },
-  { id: 'sklenar',  name: 'Sklenář Ondřej',    str: 1656, w: 21, l: 29, pct: 42.00, club: 'TJ Slavoj Praha B' },
-  { id: 'radka',    name: 'Kaba Radka',         str: 1581, w: 2,  l: 10, pct: 16.67, club: 'TJ Slavoj Praha B' },
-];
+// ── CONFIG ──
+const FIREBASE_CONFIG = {
+  apiKey:"AIzaSyCor9PTYUgj_OScDeksdr9HTz6HDFphgkQ",
+  authDomain:"bizon-bet.firebaseapp.com",
+  projectId:"bizon-bet",
+  storageBucket:"bizon-bet.firebasestorage.app",
+  messagingSenderId:"921891579815",
+  appId:"1:921891579815:web:7fe993317e967079107882",
+  measurementId:"G-YSEH5XFX5K"
+};
 
-const NUSLE_OPPONENTS = [
-  { name: "Pour Lukáš",      str: 1495, w: 4,  l: 20, pct: 16.67 },
-  { name: "Tichý Květoslav", str: 1576, w: 5,  l: 31, pct: 13.89 },
-  { name: "Hron Jiří",       str: 1596, w: 13, l: 34, pct: 27.66 },
-  { name: "Kraml Karel",     str: 1604, w: 8,  l: 19, pct: 29.63 },
-  { name: "Zapletal Jan",    str: 1609, w: 30, l: 27, pct: 52.63 },
-  { name: "Plch Jiří",       str: 1627, w: 2,  l: 1,  pct: 66.67 },
-  { name: "Němec Michal",    str: 1628, w: 1,  l: 5,  pct: 16.67 },
-  { name: "Prokš Vladimír",  str: 1651, w: 17, l: 33, pct: 34.00 },
-  { name: "Jelínek Šimon",   str: 1669, w: 20, l: 25, pct: 44.44 },
-];
+// Admin emails — add yours here
+const ADMIN_EMAILS = ['on.sklenar@gmail.com'];
 
-let selectedPlayer = TEAM_PLAYERS[0];
+// ── STATE ──
+let currentUser = null, auth, db;
+let matches = []; // loaded from Firestore
+let selectedMatch = null;
+let selectedPlayer = null;
 let ticket = [];
-let currentUser = null;
-let auth = null;
-let db = null;
-let firebaseReady = false;
+
+// Temp state for new match editor
+let newPlayers = [], newOpponents = [];
 
 // ── UTILS ──
+const esc = s => { const d = document.createElement('div'); d.appendChild(document.createTextNode(String(s))); return d.innerHTML; };
+const $ = id => document.getElementById(id);
 const calcOdds = (oppStr, playerStr) => {
   const p = Math.max(0.04, (1 / (1 + Math.pow(10, (oppStr - playerStr) / 400))) * 0.85);
   return parseFloat((1 / p).toFixed(2));
 };
 const colorClass = o => o < 4 ? 'color-green' : o < 8 ? 'color-amber' : 'color-red';
-const esc = s => { const d = document.createElement('div'); d.appendChild(document.createTextNode(String(s))); return d.innerHTML; };
-const $ = id => document.getElementById(id);
+const isAdmin = () => currentUser && ADMIN_EMAILS.includes(currentUser.email);
 
-function showToast(msg) {
+function showToast(msg, dur=3200) {
   const t = $('toast'); t.textContent = msg; t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3200);
+  setTimeout(() => t.classList.remove('show'), dur);
 }
 
-// ── FIREBASE ──
-const FIREBASE_CONFIG = {
-  apiKey:            "AIzaSyCor9PTYUgj_OScDeksdr9HTz6HDFphgkQ",
-  authDomain:        "bizon-bet.firebaseapp.com",
-  projectId:         "bizon-bet",
-  storageBucket:     "bizon-bet.firebasestorage.app",
-  messagingSenderId: "921891579815",
-  appId:             "1:921891579815:web:7fe993317e967079107882",
-  measurementId:     "G-YSEH5XFX5K"
-};
-
-function tryInitFirebase() {
-  try {
-    const app = getApps().length ? getApps()[0] : initializeApp(FIREBASE_CONFIG);
-    auth = getAuth(app);
-    db = getFirestore(app);
-    firebaseReady = true;
-    $('setupBanner').style.display = 'none';
-    onAuthStateChanged(auth, handleAuth);
-    return true;
-  } catch(e) { showToast('Firebase chyba: ' + e.message); return false; }
+function formatDate(dateStr) {
+  if (!dateStr) return '';
+  const d = new Date(dateStr);
+  return d.toLocaleDateString('cs-CZ', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
 }
 
-window.saveConfig = () => {
-  if (tryInitFirebase()) showToast('✓ Firebase připojen! Můžeš se přihlásit.');
-};
+// ── FIREBASE INIT ──
+const app = getApps().length ? getApps()[0] : initializeApp(FIREBASE_CONFIG);
+auth = getAuth(app);
+db = getFirestore(app);
+onAuthStateChanged(auth, handleAuth);
+loadMatches();
 
 // ── AUTH ──
-window.showLogin = () => {
-  if (!firebaseReady) { showToast('Nejdřív nakonfiguruj Firebase!'); return; }
-  $('loginScreen').classList.add('active');
-};
+window.showLogin = () => $('loginScreen').classList.add('active');
 window.hideLogin = () => $('loginScreen').classList.remove('active');
 
 window.signInGoogle = async () => {
   try { await signInWithPopup(auth, new GoogleAuthProvider()); hideLogin(); }
-  catch(e) { showToast('Google: ' + e.message); }
-};
-window.signInMicrosoft = async () => {
-  try {
-    const p = new OAuthProvider('microsoft.com');
-    p.setCustomParameters({ prompt: 'select_account' });
-    await signInWithPopup(auth, p); hideLogin();
-  } catch(e) { showToast('Microsoft: ' + e.message); }
+  catch(e) { showToast('Chyba: ' + e.message); }
 };
 window.doSignOut = async () => { await signOut(auth); showToast('Odhlášen'); };
 
@@ -405,8 +555,9 @@ function handleAuth(user) {
     const name = esc(user.displayName || user.email || 'Uživatel');
     const avatar = user.photoURL
       ? `<img src="${esc(user.photoURL)}" alt="">`
-      : `<span class="u-avatar">${esc((user.displayName || '?')[0])}</span>`;
-    area.innerHTML = `<div class="user-pill">${avatar}<span class="u-name">${name}</span></div><button class="btn-auth" onclick="doSignOut()">ODHLÁSIT</button>`;
+      : `<span class="u-avatar">${esc((user.displayName||'?')[0])}</span>`;
+    const adminBtn = isAdmin() ? `<button class="btn-admin" onclick="openAdmin()">⚙️ ADMIN</button>` : '';
+    area.innerHTML = `<div class="user-pill">${avatar}<span class="u-name">${name}</span></div>${adminBtn}<button class="btn-auth" onclick="doSignOut()">ODHLÁSIT</button>`;
     const ni = $('betName'); if (ni && !ni.value) ni.value = user.displayName || '';
     loadHistory();
   } else {
@@ -416,93 +567,115 @@ function handleAuth(user) {
   renderSubmitArea();
 }
 
-// ── HISTORY ──
-async function loadHistory() {
-  if (!currentUser || !db) return;
+// ── MATCHES ──
+async function loadMatches() {
   try {
-    const q = query(collection(db, 'tickets'), where('uid', '==', currentUser.uid), orderBy('createdAt', 'desc'));
-    const snap = await getDocs(q);
-    const section = $('historySection'), list = $('historyList');
-    if (snap.empty) { section.style.display = 'none'; return; }
-    section.style.display = 'block';
-    list.innerHTML = '';
-    snap.forEach(doc => {
-      const d = doc.data();
-      const date = d.createdAt?.toDate ? d.createdAt.toDate().toLocaleDateString('cs-CZ') : '–';
-      const names = (d.matches || []).map(m => `${esc(m.playerName||'?')} vs ${esc(m.name)}`).join(' · ');
-      const el = document.createElement('div');
-      el.className = 'history-item';
-      el.innerHTML = `
-        <div class="hi-header"><span class="hi-ref">${esc(d.ref||'')}</span><span class="hi-date">${date}</span></div>
-        <div class="hi-matches">vs ${names}</div>
-        <div class="hi-footer"><span class="hi-combo">Kurz: ${parseFloat(d.combo||1).toFixed(2)}</span><span class="hi-payout">Výhra: ${d.payout||'–'} Kč</span></div>`;
-      list.appendChild(el);
+    const q = query(collection(db, 'matches'), orderBy('matchDate', 'desc'));
+    onSnapshot(q, snap => {
+      matches = [];
+      snap.forEach(d => matches.push({ id: d.id, ...d.data() }));
+      // Filter: only published for regular users
+      renderMatchTabs();
+      if (matches.length > 0 && !selectedMatch) {
+        const pub = matches.find(m => m.status === 'published') || matches[0];
+        selectMatch(pub);
+      }
+      if ($('adminPanel').classList.contains('active')) renderAdminMatchList();
     });
   } catch(e) { console.error(e); }
 }
 
-// ── PLAYER SELECTOR ──
-function renderPlayerSelector() {
-  const sel = $('playerSelector');
-  sel.innerHTML = '';
-  TEAM_PLAYERS.forEach(p => {
-    const btn = document.createElement('button');
-    btn.className = 'player-btn' + (p.id === selectedPlayer.id ? ' active' : '');
-    btn.innerHTML = `<span class="pb-name">${esc(p.name)}</span><span class="pb-str">STR ${p.str}</span>`;
-    btn.onclick = () => selectPlayer(p);
-    sel.appendChild(btn);
+function renderMatchTabs() {
+  const tabs = $('matchTabs');
+  const visible = isAdmin() ? matches : matches.filter(m => m.status === 'published');
+  if (visible.length === 0) {
+    tabs.innerHTML = `<div class="no-matches">Žádné zápasy nejsou k dispozici.<br>Brzy přijdou! 🏓</div>`;
+    return;
+  }
+  tabs.innerHTML = '';
+  visible.forEach(m => {
+    const btn = document.createElement('div');
+    btn.className = 'match-tab' + (selectedMatch?.id === m.id ? ' active' : '');
+    const statusLabel = m.status === 'draft' ? ' [DRAFT]' : m.status === 'archived' ? ' [ARCHIV]' : '';
+    btn.innerHTML = `<div class="mt-name">vs ${esc(m.opponentTeam)}${statusLabel}</div>
+      <div class="mt-date">${formatDate(m.matchDate)}${m.matchTime ? ' · ' + m.matchTime : ''}</div>
+      <div class="mt-status">${m.venue || ''}</div>`;
+    btn.onclick = () => selectMatch(m);
+    tabs.appendChild(btn);
   });
 }
 
-function selectPlayer(p) {
-  selectedPlayer = p;
+function selectMatch(m) {
+  selectedMatch = m;
   ticket = [];
+  selectedPlayer = m.players?.[0] || null;
+  renderMatchTabs();
   renderPlayerSelector();
-  renderPlayerCard();
   renderOpponents();
   renderTicket();
+  // Update header badge
+  const badge = $('matchDateBadge');
+  if (m.matchDate) {
+    badge.textContent = '🏓 ' + formatDate(m.matchDate) + (m.matchTime ? ' · ' + m.matchTime : '');
+    badge.style.display = 'block';
+  }
+  $('ticketMatchInfo').textContent = m.matchDate ? 'vs ' + m.opponentTeam + ' · ' + formatDate(m.matchDate) : '';
+  $('playerSelectorWrap').style.display = 'block';
+  if (m.opponentTeam) $('oppTitle').textContent = `SOUPEŘI Z ${m.opponentTeam.toUpperCase()} — KLIKNI PRO PŘIDÁNÍ`;
 }
 
-function renderPlayerCard() {
-  const p = selectedPlayer;
-  $('playerName').textContent = p.name;
-  $('playerClub').textContent = p.club;
-  $('playerSTR').textContent = p.str;
+// ── PLAYER SELECTOR ──
+function renderPlayerSelector() {
+  const sel = $('playerSelector'); sel.innerHTML = '';
+  if (!selectedMatch?.players?.length) { sel.innerHTML = '<div style="color:var(--muted);font-size:.75rem;font-family:DM Mono,monospace">Žádní hráči v tomto zápase.</div>'; return; }
+  selectedMatch.players.forEach(p => {
+    const btn = document.createElement('button');
+    btn.className = 'player-btn' + (selectedPlayer?.name === p.name ? ' active' : '');
+    btn.innerHTML = `<span class="pb-name">${esc(p.name)}</span><span class="pb-str">STR ${p.str}</span>`;
+    btn.onclick = () => { selectedPlayer = p; ticket = []; renderPlayerSelector(); renderOpponents(); renderTicket(); };
+    sel.appendChild(btn);
+  });
+  if (selectedPlayer) {
+    $('playerName').textContent = selectedPlayer.name;
+    $('playerClub').textContent = selectedPlayer.club || 'TJ Slavoj Praha B';
+    $('playerSTR').textContent = selectedPlayer.str;
+  }
 }
 
 // ── OPPONENTS ──
 function renderOpponents() {
   const list = $('oppList'); list.innerHTML = '';
-  NUSLE_OPPONENTS.forEach(opp => {
+  if (!selectedMatch?.opponents?.length) {
+    list.innerHTML = '<div style="color:var(--muted);font-size:.75rem;font-family:DM Mono,monospace;padding:.5rem 0">Žádní soupeři v tomto zápase.</div>';
+    return;
+  }
+  if (!selectedPlayer) return;
+  const sorted = [...selectedMatch.opponents].sort((a,b) => a.str - b.str);
+  sorted.forEach(opp => {
     const odds = calcOdds(opp.str, selectedPlayer.str);
     const diff = opp.str - selectedPlayer.str;
-    const sel = ticket.some(t => t.name === opp.name);
+    const sel = ticket.some(t => t.name === opp.name && t.playerName === selectedPlayer.name);
     const row = document.createElement('div');
     row.className = 'opp-row' + (sel ? ' selected' : '');
-
     const info = document.createElement('div');
-    info.innerHTML = `<div class="opp-name">${esc(opp.name)}</div><div class="opp-meta">STR ${opp.str} · ${opp.w}V/${opp.l}P · ${opp.pct.toFixed(0)}% úsp.</div>`;
-
+    info.innerHTML = `<div class="opp-name">${esc(opp.name)}</div><div class="opp-meta">STR ${opp.str} · ${opp.w||0}V/${opp.l||0}P · ${(opp.pct||0).toFixed(0)}% úsp.</div>`;
     const gap = document.createElement('div');
     gap.className = 'str-gap';
-    gap.innerHTML = `${diff >= 0 ? '+' : ''}${diff}<span class="gap-val">STR gap</span>`;
-
+    gap.innerHTML = `${diff>=0?'+':''}${diff}<span class="gap-val">STR gap</span>`;
     const oddsDiv = document.createElement('div');
     oddsDiv.className = 'odds-display';
     oddsDiv.innerHTML = `<div class="odds-val ${colorClass(odds)}">${odds.toFixed(2)}</div><div class="odds-prob">${(100/odds).toFixed(1)}% šance</div>`;
-
     const btn = document.createElement('button');
-    btn.className = 'add-btn';
-    btn.textContent = sel ? '✓' : '+';
-
+    btn.className = 'add-btn'; btn.textContent = sel ? '✓' : '+';
     row.appendChild(info); row.appendChild(gap); row.appendChild(oddsDiv); row.appendChild(btn);
-    row.onclick = () => { toggleOpp(opp, odds); };
+    row.onclick = () => toggleOpp(opp, odds);
     list.appendChild(row);
   });
 }
 
 function toggleOpp(opp, odds) {
-  const idx = ticket.findIndex(t => t.name === opp.name);
+  if (!selectedPlayer) return;
+  const idx = ticket.findIndex(t => t.name === opp.name && t.playerName === selectedPlayer.name);
   if (idx >= 0) ticket.splice(idx, 1);
   else ticket.push({ name: opp.name, odds, playerName: selectedPlayer.name });
   renderOpponents(); renderTicket();
@@ -511,109 +684,329 @@ function toggleOpp(opp, odds) {
 // ── TICKET ──
 function renderTicket() {
   const empty = $('ticketEmpty'), items = $('ticketItems'), form = $('ticketForm');
-  if (ticket.length === 0) {
-    empty.style.display = 'block'; items.innerHTML = ''; form.style.display = 'none'; return;
-  }
-  empty.style.display = 'none'; form.style.display = 'block';
-  items.innerHTML = '';
-  ticket.forEach((t, i) => {
-    const div = document.createElement('div'); div.className = 'ticket-item';
-    const nameDiv = document.createElement('div');
-    nameDiv.innerHTML = `<div class="ti-name">${esc(t.playerName)} vs ${esc(t.name)}</div><div class="ti-vs">výhra ${esc(t.playerName.split(' ')[0])}</div>`;
-    const oddsSpan = document.createElement('span'); oddsSpan.className = 'ti-odds'; oddsSpan.textContent = t.odds.toFixed(2);
-    const rmBtn = document.createElement('button'); rmBtn.className = 'ti-remove'; rmBtn.textContent = '✕';
-    rmBtn.onclick = e => { e.stopPropagation(); ticket.splice(i, 1); renderOpponents(); renderTicket(); };
-    div.appendChild(nameDiv); div.appendChild(oddsSpan); div.appendChild(rmBtn);
-    items.appendChild(div);
+  if (ticket.length === 0) { empty.style.display='block'; items.innerHTML=''; form.style.display='none'; return; }
+  empty.style.display='none'; form.style.display='block';
+  items.innerHTML='';
+  ticket.forEach((t,i) => {
+    const div = document.createElement('div'); div.className='ticket-item';
+    const nd = document.createElement('div');
+    nd.innerHTML=`<div class="ti-name">${esc(t.playerName)} vs ${esc(t.name)}</div><div class="ti-vs">výhra ${esc(t.playerName.split(' ')[0])}</div>`;
+    const os = document.createElement('span'); os.className='ti-odds'; os.textContent=t.odds.toFixed(2);
+    const rb = document.createElement('button'); rb.className='ti-remove'; rb.textContent='✕';
+    rb.onclick = e => { e.stopPropagation(); ticket.splice(i,1); renderOpponents(); renderTicket(); };
+    div.appendChild(nd); div.appendChild(os); div.appendChild(rb); items.appendChild(div);
   });
   updateCalc(); renderSubmitArea();
 }
 
 function renderSubmitArea() {
   const area = $('submitArea'); if (!area) return;
-  if (!firebaseReady) {
-    area.innerHTML = `<div class="login-cta"><p>Nakonfiguruj Firebase výše pro ukládání tiketů.</p></div>`; return;
-  }
   if (!currentUser) {
-    area.innerHTML = `<div class="login-cta"><p>Přihlas se přes Google pro potvrzení tiketu a uložení do historie.</p><button class="btn-login-small" onclick="showLogin()">PŘIHLÁSIT SE</button></div>`; return;
+    area.innerHTML=`<div class="login-cta"><p>Přihlas se přes Google pro potvrzení tiketu.</p><button class="btn-login-small" onclick="showLogin()">PŘIHLÁSIT SE</button></div>`;
+    return;
   }
-  area.innerHTML = `<button class="submit-btn" onclick="submitTicket()">POTVRDIT TIKET</button>`;
+  area.innerHTML=`<button class="submit-btn" onclick="submitTicket()">POTVRDIT TIKET</button>`;
 }
 
-function getCombo() { return ticket.reduce((a, t) => a * t.odds, 1); }
+function getCombo() { return ticket.reduce((a,t) => a*t.odds, 1); }
 
 function updateCalc() {
   const combo = getCombo();
-  const el = $('comboOdds'); if (el) el.textContent = combo.toFixed(2);
+  const el = $('comboOdds'); if (el) el.textContent=combo.toFixed(2);
   const stake = parseInt($('betAmount').value);
-  const fee = Math.round(stake * 0.1), net = stake - fee, win = Math.round(net * combo);
-  $('amountDisplay').textContent = stake + ' Kč';
-  $('p-stake').textContent = stake + ' Kč';
-  $('p-fee').textContent = fee + ' Kč';
-  $('p-net').textContent = net + ' Kč';
-  $('p-win').textContent = win + ' Kč';
+  const fee=Math.round(stake*.1), net=stake-fee, win=Math.round(net*combo);
+  $('amountDisplay').textContent=stake+' Kč';
+  $('p-stake').textContent=stake+' Kč'; $('p-fee').textContent=fee+' Kč';
+  $('p-net').textContent=net+' Kč'; $('p-win').textContent=win+' Kč';
 }
-
 $('betAmount').addEventListener('input', updateCalc);
 
-// ── SUBMIT ──
+// ── SUBMIT TICKET ──
 window.submitTicket = async () => {
   if (!currentUser) { showLogin(); return; }
   const name = $('betName').value.trim();
   if (!name) { $('betName').focus(); showToast('Zadej jméno sázkaře!'); return; }
-
   const stake = parseInt($('betAmount').value);
-  if (stake < 20 || stake > 200) { showToast('Vklad musí být mezi 20 a 200 Kč!'); return; }
-
-  const fee = Math.round(stake * 0.1), net = stake - fee;
-  const combo = getCombo(), win = Math.round(net * combo);
-  const ref = 'BB-' + Math.floor(100000 + Math.random() * 900000);
-
+  if (stake<20||stake>200) { showToast('Vklad 20–200 Kč!'); return; }
+  const fee=Math.round(stake*.1), net=stake-fee, combo=getCombo(), win=Math.round(net*combo);
+  const ref = 'BB-'+Math.floor(100000+Math.random()*900000);
   const btn = document.querySelector('.submit-btn');
-  if (btn) { btn.disabled = true; btn.textContent = 'UKLÁDÁM...'; }
-
+  if (btn) { btn.disabled=true; btn.textContent='UKLÁDÁM…'; }
   try {
-    await addDoc(collection(db, 'tickets'), {
-      uid: currentUser.uid,
-      userName: currentUser.displayName || currentUser.email,
-      ref, bettor: name, stake, fee, net, combo: combo.toFixed(2), payout: win,
-      matches: ticket.map(t => ({ name: t.name, odds: t.odds, playerName: t.playerName })),
-      createdAt: serverTimestamp(),
+    await addDoc(collection(db,'tickets'), {
+      uid:currentUser.uid, userName:currentUser.displayName||currentUser.email,
+      matchId:selectedMatch?.id||'', matchName:selectedMatch?.opponentTeam||'',
+      matchDate:selectedMatch?.matchDate||'',
+      ref, bettor:name, stake, fee, net, combo:combo.toFixed(2), payout:win,
+      matches:ticket.map(t=>({name:t.name,odds:t.odds,playerName:t.playerName})),
+      createdAt:serverTimestamp()
     });
-  } catch(e) {
-    showToast('Chyba ukládání: ' + e.message);
-    if (btn) { btn.disabled = false; btn.textContent = 'POTVRDIT TIKET'; }
-    return;
-  }
-
-  if (btn) { btn.disabled = false; btn.textContent = 'POTVRDIT TIKET'; }
-
-  // Show confirm
-  $('c-ref').textContent = 'REF: ' + ref;
-  $('c-name').textContent = name;
-  const cm = $('c-matches'); cm.innerHTML = '';
+  } catch(e) { showToast('Chyba: '+e.message); if(btn){btn.disabled=false;btn.textContent='POTVRDIT TIKET';} return; }
+  if (btn) { btn.disabled=false; btn.textContent='POTVRDIT TIKET'; }
+  $('c-ref').textContent='REF: '+ref; $('c-name').textContent=name;
+  const cm=$('c-matches'); cm.innerHTML='';
   ticket.forEach(t => {
-    const row = document.createElement('div'); row.className = 'confirm-match';
-    const l = document.createElement('span'); l.textContent = t.playerName + ' vs ' + t.name;
-    const r = document.createElement('span'); r.textContent = t.odds.toFixed(2);
+    const row=document.createElement('div'); row.className='confirm-match';
+    const l=document.createElement('span'); l.textContent=t.playerName+' vs '+t.name;
+    const r=document.createElement('span'); r.textContent=t.odds.toFixed(2);
     row.appendChild(l); row.appendChild(r); cm.appendChild(row);
   });
-  $('c-amt').textContent = win + ' Kč';
+  $('c-amt').textContent=win+' Kč';
   $('confirmOverlay').classList.add('active');
   loadHistory();
 };
 
 window.closeConfirm = () => {
   $('confirmOverlay').classList.remove('active');
-  ticket = []; renderOpponents(); renderTicket();
+  ticket=[]; renderOpponents(); renderTicket();
 };
 
-// ── BOOT ──
-tryInitFirebase();
-renderPlayerSelector();
-renderPlayerCard();
-renderOpponents();
-renderTicket();
+// ── HISTORY ──
+async function loadHistory() {
+  if (!currentUser||!db) return;
+  try {
+    const q=query(collection(db,'tickets'),where('uid','==',currentUser.uid),orderBy('createdAt','desc'));
+    const snap=await getDocs(q);
+    const sec=$('historySection'), list=$('historyList');
+    if (snap.empty) { sec.style.display='none'; return; }
+    sec.style.display='block'; list.innerHTML='';
+    snap.forEach(doc => {
+      const d=doc.data();
+      const date=d.createdAt?.toDate?d.createdAt.toDate().toLocaleDateString('cs-CZ'):'–';
+      const ms=(d.matches||[]).map(m=>`${esc(m.playerName||'?')} vs ${esc(m.name)}`).join(' · ');
+      const el=document.createElement('div'); el.className='history-item';
+      el.innerHTML=`<div class="hi-header"><span class="hi-ref">${esc(d.ref||'')}</span><span class="hi-date">${date}</span></div>
+        <div class="hi-matches">vs ${esc(d.matchName||'')} · ${ms}</div>
+        <div class="hi-footer"><span class="hi-combo">Kurz: ${parseFloat(d.combo||1).toFixed(2)}</span><span class="hi-payout">Výhra: ${d.payout||'–'} Kč</span></div>`;
+      list.appendChild(el);
+    });
+  } catch(e) { console.error(e); }
+}
+
+// ══════════════════════════════
+// ADMIN PANEL
+// ══════════════════════════════
+window.openAdmin = () => {
+  if (!isAdmin()) { showToast('Nemáš oprávnění!'); return; }
+  $('adminPanel').classList.add('active');
+  renderAdminMatchList();
+  resetNewMatchForm();
+};
+window.closeAdmin = () => $('adminPanel').classList.remove('active');
+
+window.switchAdminTab = (tab) => {
+  document.querySelectorAll('.admin-tab').forEach((t,i) => t.classList.toggle('active', ['matches','new'][i]===tab));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  $('tab-'+tab).classList.add('active');
+  if (tab==='new') resetNewMatchForm();
+};
+
+function renderAdminMatchList() {
+  const list=$('adminMatchList');
+  if (!matches.length) { list.innerHTML='<div style="color:var(--muted);font-size:.75rem;font-family:DM Mono,monospace">Žádné zápasy.</div>'; return; }
+  list.innerHTML='';
+  matches.forEach(m => {
+    const row=document.createElement('div'); row.className='match-admin-row';
+    const statusBadge=`<span class="status-badge status-${m.status||'draft'}">${(m.status||'draft').toUpperCase()}</span>`;
+    row.innerHTML=`
+      <div class="mar-info">
+        <div class="mar-name">vs ${esc(m.opponentTeam||'?')} ${statusBadge}</div>
+        <div class="mar-date">${formatDate(m.matchDate)}${m.matchTime?' · '+m.matchTime:''}</div>
+        <div class="mar-meta">${(m.players||[]).length} hráčů · ${(m.opponents||[]).length} soupeřů · ${m.venue||''}</div>
+      </div>
+      <div class="mar-actions">
+        ${m.status!=='published'?`<button class="mar-btn pub" onclick="publishMatch('${m.id}')">🚀 PUBLIKOVAT</button>`:''}
+        ${m.status==='published'?`<button class="mar-btn" onclick="archiveMatch('${m.id}')">📦 ARCHIVOVAT</button>`:''}
+        <button class="mar-btn" onclick="editMatch('${m.id}')">✏️ UPRAVIT</button>
+        <button class="mar-btn del" onclick="deleteMatchConfirm('${m.id}')">🗑 SMAZAT</button>
+      </div>`;
+    list.appendChild(row);
+  });
+}
+
+window.publishMatch = async id => {
+  try { await updateDoc(doc(db,'matches',id),{status:'published'}); showToast('✓ Zápas publikován!'); }
+  catch(e) { showToast('Chyba: '+e.message); }
+};
+window.archiveMatch = async id => {
+  try { await updateDoc(doc(db,'matches',id),{status:'archived'}); showToast('Zápas archivován.'); }
+  catch(e) { showToast('Chyba: '+e.message); }
+};
+window.deleteMatchConfirm = async id => {
+  if (!confirm('Opravdu smazat tento zápas? Toto nelze vrátit.')) return;
+  try { await deleteDoc(doc(db,'matches',id)); showToast('Zápas smazán.'); }
+  catch(e) { showToast('Chyba: '+e.message); }
+};
+
+window.editMatch = async id => {
+  const m = matches.find(x=>x.id===id);
+  if (!m) return;
+  switchAdminTab('new');
+  $('newOppTeam').value = m.opponentTeam||'';
+  $('newMatchDate').value = m.matchDate||'';
+  $('newMatchTime').value = m.matchTime||'';
+  $('newMatchVenue').value = m.venue||'';
+  newPlayers = [...(m.players||[])];
+  newOpponents = [...(m.opponents||[])];
+  renderPersonList('player'); renderPersonList('opponent');
+  // Store editing ID
+  $('tab-new').dataset.editId = id;
+  showToast('Upravuješ existující zápas. Ulož pro uložení změn.');
+};
+
+// ── PERSON LISTS ──
+function renderPersonList(type) {
+  const list = $(type==='player'?'newPlayerList':'newOpponentList');
+  const arr = type==='player' ? newPlayers : newOpponents;
+  list.innerHTML='';
+  arr.forEach((p,i) => {
+    const row=document.createElement('div'); row.className='person-row';
+    row.innerHTML=`<span class="pr-name">${esc(p.name)}</span><span class="pr-str">STR ${p.str}</span>
+      <button class="pr-del" onclick="removePerson('${type}',${i})">✕</button>`;
+    list.appendChild(row);
+  });
+}
+
+window.removePerson = (type, i) => {
+  if (type==='player') newPlayers.splice(i,1); else newOpponents.splice(i,1);
+  renderPersonList(type);
+};
+
+window.addPerson = (type) => {
+  const isPlayer = type==='player';
+  const nameEl = $(isPlayer?'newPlayerName':'newOppName');
+  const strEl = $(isPlayer?'newPlayerStr':'newOppStr');
+  const name = nameEl.value.trim();
+  const str = parseInt(strEl.value);
+  if (!name) { showToast('Zadej jméno!'); nameEl.focus(); return; }
+  if (!str||str<1000||str>3000) { showToast('STR musí být 1000–3000!'); strEl.focus(); return; }
+  const url = $(isPlayer?'newPlayerUrl':'newOppUrl').value.trim();
+  const obj = { name, str, url };
+  if (isPlayer) { newPlayers.push({...obj, club:'TJ Slavoj Praha B'}); }
+  else { newOpponents.push({...obj, w:0, l:0, pct:0}); }
+  renderPersonList(type);
+  nameEl.value=''; strEl.value=''; $(isPlayer?'newPlayerUrl':'newOppUrl').value='';
+};
+
+// ── FETCH STR FROM STIS ──
+window.fetchPlayerStr = async (target) => {
+  const isPlayer = target==='new';
+  const urlEl = $(isPlayer?'newPlayerUrl':'newOppUrl');
+  const strEl = $(isPlayer?'newPlayerStr':'newOppStr');
+  const nameEl = $(isPlayer?'newPlayerName':'newOppName');
+  const url = urlEl.value.trim();
+  if (!url) { showToast('Zadej STIS URL!'); return; }
+  const btn = document.querySelector(`[onclick="fetchPlayerStr('${target}')"]`);
+  if (btn) { btn.disabled=true; btn.innerHTML='<span class="spinner"></span>NAČÍTÁM…'; }
+  try {
+    // Use a CORS proxy to fetch the STIS page
+    const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
+    const resp = await fetch(proxyUrl);
+    const html = await resp.text();
+    // Extract STR rating
+    const strMatch = html.match(/STR:\s*(\d{3,4})/);
+    // Extract name
+    const nameMatch = html.match(/<h[12][^>]*>([^<]+Ondřej|[^<]+Daniel|[^<]+David|[^<]+Veronika|[^<]+Šimůnek|[^<]+Jelínek|[^<]+Prokš|[^<]+Plch|[^<]+Hron|[^<]+Zapletal|[^<]+Kraml|[^<]+Tichý|[^<]+Pour|[^<]+Němec|[^<]+Kaba|[^<]+Sklenář|[^<]+Šindelář|[^<]+Pospíšil|[^<]+Šimůnková)<\/h[12]>/i) ||
+                     html.match(/<h1[^>]*class="[^"]*"[^>]*>([^<]+)<\/h1>/);
+    if (strMatch) { strEl.value = strMatch[1]; }
+    // Try to get name from page
+    const h1Match = html.match(/<h1[^>]*>([^<]+)<\/h1>/);
+    if (h1Match && !nameEl.value) nameEl.value = h1Match[1].trim();
+    if (strMatch) showToast(`✓ STR: ${strMatch[1]}`);
+    else showToast('STR nenalezen — zadej ručně');
+  } catch(e) {
+    showToast('Nelze načíst — zadej STR ručně');
+  } finally {
+    if (btn) { btn.disabled=false; btn.textContent='📡 NAČÍST STR'; }
+  }
+};
+
+// ── SAVE MATCH ──
+window.saveMatch = async (status) => {
+  const oppTeam = $('newOppTeam').value.trim();
+  const date = $('newMatchDate').value;
+  if (!oppTeam) { showToast('Zadej název soupeřova týmu!'); $('newOppTeam').focus(); return; }
+  if (!date) { showToast('Zadej datum zápasu!'); $('newMatchDate').focus(); return; }
+  if (!newPlayers.length) { showToast('Přidej alespoň jednoho hráče!'); return; }
+  if (!newOpponents.length) { showToast('Přidej alespoň jednoho soupeře!'); return; }
+
+  const data = {
+    opponentTeam: oppTeam,
+    matchDate: date,
+    matchTime: $('newMatchTime').value || '',
+    venue: $('newMatchVenue').value.trim(),
+    players: newPlayers,
+    opponents: newOpponents,
+    status,
+    updatedAt: serverTimestamp()
+  };
+
+  try {
+    const editId = $('tab-new').dataset.editId;
+    if (editId) {
+      await updateDoc(doc(db,'matches',editId), data);
+      delete $('tab-new').dataset.editId;
+      showToast('✓ Zápas aktualizován!');
+    } else {
+      data.createdAt = serverTimestamp();
+      await addDoc(collection(db,'matches'), data);
+      showToast(status==='published' ? '🚀 Zápas publikován!' : '💾 Draft uložen!');
+    }
+    resetNewMatchForm();
+    switchAdminTab('matches');
+  } catch(e) { showToast('Chyba: '+e.message); }
+};
+
+function resetNewMatchForm() {
+  $('newOppTeam').value=''; $('newMatchDate').value=''; $('newMatchTime').value=''; $('newMatchVenue').value='';
+  newPlayers=[]; newOpponents=[];
+  renderPersonList('player'); renderPersonList('opponent');
+  delete $('tab-new').dataset.editId;
+  // Pre-fill the upcoming Nusle match date
+  $('newMatchDate').value = '2026-03-26';
+  $('newMatchTime').value = '18:00';
+  $('newOppTeam').value = '';
+}
+
+// Pre-seed the default match on first load if no matches exist
+async function seedDefaultMatch() {
+  const q = query(collection(db,'matches'));
+  const snap = await getDocs(q);
+  if (!snap.empty) return;
+  // Only seed if admin
+  if (!isAdmin()) return;
+  showToast('Zakládám výchozí zápas…');
+  await addDoc(collection(db,'matches'), {
+    opponentTeam: 'TJ Sokol Nusle Praha A',
+    matchDate: '2026-03-26',
+    matchTime: '18:00',
+    venue: '',
+    status: 'published',
+    createdAt: serverTimestamp(),
+    players: [
+      {name:'Šimůnek Ondřej',str:1512,club:'TJ Slavoj Praha B',url:''},
+      {name:'Šimůnková Veronika',str:1683,club:'TJ Slavoj Praha B',url:''},
+      {name:'Šindelář Daniel',str:1749,club:'TJ Slavoj Praha B',url:''},
+      {name:'Pospíšil David',str:1745,club:'TJ Slavoj Praha B',url:''},
+      {name:'Sklenář Ondřej',str:1656,club:'TJ Slavoj Praha B',url:''},
+      {name:'Kaba Radka',str:1581,club:'TJ Slavoj Praha B',url:''},
+    ],
+    opponents: [
+      {name:'Pour Lukáš',str:1495,w:4,l:20,pct:16.67,url:''},
+      {name:'Tichý Květoslav',str:1576,w:5,l:31,pct:13.89,url:''},
+      {name:'Hron Jiří',str:1596,w:13,l:34,pct:27.66,url:''},
+      {name:'Kraml Karel',str:1604,w:8,l:19,pct:29.63,url:''},
+      {name:'Zapletal Jan',str:1609,w:30,l:27,pct:52.63,url:''},
+      {name:'Plch Jiří',str:1627,w:2,l:1,pct:66.67,url:''},
+      {name:'Němec Michal',str:1628,w:1,l:5,pct:16.67,url:''},
+      {name:'Prokš Vladimír',str:1651,w:17,l:33,pct:34.00,url:''},
+      {name:'Jelínek Šimon',str:1669,w:20,l:25,pct:44.44,url:''},
+    ]
+  });
+}
+
+// Try to seed after auth is ready
+setTimeout(() => { if (isAdmin()) seedDefaultMatch(); }, 2000);
 </script>
 </body>
 </html>
